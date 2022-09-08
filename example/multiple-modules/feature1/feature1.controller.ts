@@ -1,6 +1,6 @@
 import { Controller, Get, Render } from '@nestjs/common'
 
-@Controller('feature1')
+@Controller('/')
 export class Feature1Controller {
   @Get()
   @Render('./test/index')
