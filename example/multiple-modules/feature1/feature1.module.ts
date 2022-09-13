@@ -6,7 +6,7 @@ import { Feature1Controller } from './feature1.controller'
 @Module({
   imports: [
     TsxViewsModule.register({
-      viewsDirectory: resolve(__dirname, './views'),
+      viewsDirectory: resolve(__dirname, './_ui'),
       prettify: true,
 
       forRoutes: [Feature1Controller],
