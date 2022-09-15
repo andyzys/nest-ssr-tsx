@@ -12,6 +12,12 @@ import {
   ReactViewsContext,
   ReactViewsOptions,
 } from './react-view-engine.interface'
+import * as fs from 'fs'
+
+const generateCssStr = (cssFilePath: string) => {
+  const cssStr = fs.readFileSync(cssFilePath)
+  return `<style>${cssStr}</style>`
+}
 
 export function isTranspiled(): boolean {
   return require.main?.filename?.endsWith('.js') ?? true
@@ -27,9 +33,11 @@ export function setupReactViews(
 
   const extension = isTranspiled() ? 'js' : 'tsx'
 
-  // eslint-disable-next-line @typescript-eslint/no-misused-promises
-  app.engine(extension, reactViews(options))
-  app.set('view engine', extension)
+  // @ts-ignore
+  // app.engine(extension, reactViews(options))
+  // app.set('view engine', extension)
+  app.engine('js', reactViews(options))
+  app.set('view engine', 'js')
   app.set('views', options.viewsDirectory)
 }
 
@@ -46,11 +54,12 @@ export function addReactContext<T>(
 export function reactViews(reactViewOptions: ReactViewsOptions) {
   // eslint-disable-next-line complexity, sonarjs/cognitive-complexity
   return async function renderFile(
-    ...[filename, options, next]: EngineCallbackParameters
+    ...args: EngineCallbackParameters
   ): Promise<void> {
+    const [filename, options, next] = args
+
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { settings, _locals, cache, contexts, ...vars } =
-      options as ExpressRenderOptions
+    const { settings, _locals, cache, contexts, ...vars } = options as ExpressRenderOptions
 
     try {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
@@ -60,7 +69,6 @@ export function reactViews(reactViewOptions: ReactViewsOptions) {
         throw new Error(`Module ${filename} does not have a default export`)
       }
 
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       let context = new TsxRenderContext(Component, vars)
 
       const defaultRenderer = new DefaultTsxRenderMiddleware()
@@ -70,16 +78,6 @@ export function reactViews(reactViewOptions: ReactViewsOptions) {
       contexts?.forEach(([Context, props]) => {
         middlewares.push(new CreateReactContextRenderMiddleware(Context, props))
       })
-
-      if (reactViewOptions.prettify ?? false) {
-        middlewares.push(new PrettifyRenderMiddleware())
-      }
-
-      // eslint-disable-next-line sonarjs/no-ignored-return, unicorn/no-array-reduce
-      middlewares.reduce((prev, next) => {
-        prev.setNext(next)
-        return next
-      }, defaultRenderer)
 
       context = defaultRenderer.createElement(context)
 
@@ -94,9 +92,17 @@ export function reactViews(reactViewOptions: ReactViewsOptions) {
       }
 
       const doctype = reactViewOptions.doctype ?? '<!DOCTYPE html>\n'
-      const transform = reactViewOptions.transform || ((html) => html)
-
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      console.log('11111', doctype)
+      const transform = reactViewOptions.transform || ((html) => {
+        const injectCss = generateCssStr('/Users/andyzou/Practice/other-github/ssr/nest-ssr-tsx/build/static/test.css')
+        const injectScript = ''
+        html = `
+          ${injectCss}
+          ${html}
+          ${injectScript}
+        `
+        return html
+      })
       next(null, await transform(doctype + context.html!))
     } catch (error) {
       next(error)

@@ -15,8 +15,8 @@ export class DefaultTsxRenderMiddleware extends TsxRenderMiddleware {
 
   public async render(context: TsxRenderContext): Promise<TsxRenderContext> {
     if (!context.isRendered && context.element) {
+      console.log('!!!##', context.element)
       context.html = ReactDOM.renderToString(context.element)
-      console.log('!!!', context.html)
       // context.html = ReactDOM.renderToStaticMarkup(context.element)
     }
 
