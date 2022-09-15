@@ -22,15 +22,6 @@
     "@babel/preset-react": "^7.18.6",
     "@commitlint/cli": "^13.0.0",
     "@commitlint/config-conventional": "^13.0.0",
-    "@heise/eslint-config": "^20.0.7",
-    "@nestjs/cli": "^8.0.0",
-    "@nestjs/common": "^8.0.0",
-    "@nestjs/config": "^1.0.0",
-    "@nestjs/core": "^8.0.0",
-    "@nestjs/platform-express": "^8.0.0",
-    "@nestjs/schedule": "^1.0.0",
-    "@nestjs/schematics": "^8.0.0",
-    "@nestjs/testing": "^8.0.0",
     "@semantic-release/changelog": "^6.0.0",
     "@semantic-release/commit-analyzer": "^9.0.1",
     "@semantic-release/git": "^10.0.0",
@@ -46,9 +37,7 @@
     "cross-fetch": "^3.1.4",
     "css-loader": "^6.7.1",
     "express-tsx-views": "^1.3.1",
-    "graphql": "^15.5.1",
     "husky": "^7.0.0",
-    "jest": "^27.0.0",
     "less": "^4.1.3",
     "less-loader": "^11.0.0",
     "lint-staged": "^11.0.0",
@@ -56,8 +45,6 @@
     "pinst": "^2.1.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "reflect-metadata": "^0.1.13",
-    "rxjs": "^7.0.0",
     "semantic-release": "^18.0.0",
     "style-loader": "^3.3.1",
     "ts-jest": "^27.0.0",
@@ -65,18 +52,26 @@
     "ts-node": "^10.1.0",
     "typescript": "^4.0.0",
     "webpack": "^5.74.0",
-    "webpack-chain": "^6.5.1"
+    "@nestjs/cli": "^8.0.0",
+    "@nestjs/common": "^8.0.0",
+    "@nestjs/config": "^1.0.0",
+    "@nestjs/core": "^8.0.0",
+    "@nestjs/platform-express": "^8.0.0",
+    "@nestjs/schedule": "^1.0.0",
+    "@nestjs/schematics": "^8.0.0",
+    "reflect-metadata": "^0.1.13",
+    "rxjs": "^7.0.0",
+    "semver": "^7.3.7"
   },
   "peerDependencies": {
     "@nestjs/common": "^7.0.0 || ^8.0.0",
     "@nestjs/core": "^7.0.0 || ^8.0.0",
     "express": "^4.17.1",
-    "express-tsx-views": ">= 1.3.1",
     "react": "^17.0.1",
     "react-dom": ">= 17.0.1",
     "reflect-metadata": "^0.1.2"
   },
   "dependencies": {
-    "semver": "^7.3.7"
+    "prettier": "^2.0.5"
   }
 }

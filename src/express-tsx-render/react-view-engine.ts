@@ -5,7 +5,6 @@ import {
   DefaultTsxRenderMiddleware,
   TsxRenderContext,
 } from './handler'
-import { PrettifyRenderMiddleware } from './handler/middleware/prettify-render.middleware'
 import {
   EngineCallbackParameters,
   ExpressRenderOptions,
@@ -52,17 +51,14 @@ export function addReactContext<T>(
 }
 
 export function reactViews(reactViewOptions: ReactViewsOptions) {
-  // eslint-disable-next-line complexity, sonarjs/cognitive-complexity
   return async function renderFile(
     ...args: EngineCallbackParameters
   ): Promise<void> {
     const [filename, options, next] = args
-
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { settings, _locals, cache, contexts, ...vars } = options as ExpressRenderOptions
 
     try {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+      console.log('渲染回调参数是: ', args)
       const Component = (await import(filename)).default
 
       if (!Component) {
@@ -92,7 +88,6 @@ export function reactViews(reactViewOptions: ReactViewsOptions) {
       }
 
       const doctype = reactViewOptions.doctype ?? '<!DOCTYPE html>\n'
-      console.log('11111', doctype)
       const transform = reactViewOptions.transform || ((html) => {
         const injectCss = generateCssStr('/Users/andyzou/Practice/other-github/ssr/nest-ssr-tsx/build/static/test.css')
         const injectScript = ''
