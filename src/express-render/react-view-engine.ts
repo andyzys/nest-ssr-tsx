@@ -12,6 +12,7 @@ import {
   ReactViewsOptions,
 } from './react-view-engine.interface'
 import * as fs from 'fs'
+import { getCssStringFromBaseFolderPath, getDirPathFromFullPath } from '../scripts/util'
 
 const generateCssStr = (cssFilePath: string) => {
   const cssStr = fs.readFileSync(cssFilePath)
@@ -56,7 +57,7 @@ export function reactViews(reactViewOptions: ReactViewsOptions) {
   ): Promise<void> {
     const [filename, options, next] = args
     const { settings, _locals, cache, contexts, ...vars } = options as ExpressRenderOptions
-
+    const folderPathOfFile = getDirPathFromFullPath(filename)
     try {
       console.log('渲染回调参数是: ', args)
       const Component = (await import(filename)).default
@@ -89,8 +90,12 @@ export function reactViews(reactViewOptions: ReactViewsOptions) {
 
       const doctype = reactViewOptions.doctype ?? '<!DOCTYPE html>\n'
       const transform = reactViewOptions.transform || ((html) => {
-        console.log('html是', html)
-        const injectCss = generateCssStr('/Users/andyzou/Practice/other-github/ssr/nest-ssr-tsx/build/static/index.css')
+        
+        const injectCssList = getCssStringFromBaseFolderPath(folderPathOfFile)
+        const injectCss = injectCssList.reduce((accu: string, cssStrWithTag: string) => {
+          accu += cssStrWithTag
+          return accu
+        }, '')
         const injectScript = ''
         html = `
           ${injectCss}
