@@ -6,7 +6,7 @@ export default function(props: any) {
   return (
     <div>
       <h1 className={css.red}>{props.name}</h1>
-      <p className={css.green}>这是模块1With prettified output</p>
+      <p className={css.green}>这是模块2With prettified output</p>
     </div>
   )
 }

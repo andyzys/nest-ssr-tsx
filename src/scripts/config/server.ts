@@ -8,7 +8,8 @@ console.log('!!!!输出目录是：', path.join(process.cwd(), BUILD_PATH))
 const getServerWebpack = () => {
   const serverConfig = {
     entry: {
-      test: '/Users/andyzou/Practice/other-github/ssr/nest-ssr-tsx/example/multiple-modules/feature1/_ui/test/index.tsx'
+      index: '/Users/andyzou/Practice/other-github/ssr/nest-ssr-tsx/example/multiple-modules/feature1/_ui/test/index.tsx',
+      index2: '/Users/andyzou/Practice/other-github/ssr/nest-ssr-tsx/example/multiple-modules/feature2/_ui/test/index.tsx'
     },
     cache: {
       type: "filesystem", 

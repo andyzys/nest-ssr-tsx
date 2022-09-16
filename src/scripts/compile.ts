@@ -3,7 +3,6 @@ const { getServerWebpack } = require('./config/index')
 const path = require('path')
 const fs = require('fs')
 
-
 export const buildInfoPath = path.join(process.cwd(), './buildinfo.json');
 
 function setBuildInfo(content: any) {
@@ -14,6 +13,26 @@ function setBuildInfo(content: any) {
 }
 
 function build() {
+  let prevHash = "";
+  try {
+    const compiler = webpack(getServerWebpack());
+    compiler.run((err: any, stats: any) => {
+      console.log(stats.toString({
+        chunks: false,  // 使构建过程更静默无输出
+        colors: true    // 在控制台展示颜色
+      }))
+      console.log(stats.toJson().assetsByChunkName)
+    
+      compiler.close((closeErr: any) => {
+        console.log('编译完毕')
+      });
+    });
+  } catch (e: any) {
+    console.warn(e.message);
+  }
+}
+
+function watch() {
   let prevHash = "";
   try {
     console.log('开始编译')

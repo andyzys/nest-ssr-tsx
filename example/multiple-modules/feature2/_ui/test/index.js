@@ -40,23 +40,23 @@
   
   /***/ }),
   
-  /***/ "./example/multiple-modules/feature1/_ui/test/index.tsx":
+  /***/ "./example/multiple-modules/feature2/_ui/test/index.tsx":
   /*!**************************************************************!*\
-    !*** ./example/multiple-modules/feature1/_ui/test/index.tsx ***!
+    !*** ./example/multiple-modules/feature2/_ui/test/index.tsx ***!
     \**************************************************************/
   /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
   
-  eval("\n\nvar __importDefault = this && this.__importDefault || function (mod) {\n  return mod && mod.__esModule ? mod : {\n    \"default\": mod\n  };\n};\n\nObject.defineProperty(exports, \"__esModule\", ({\n  value: true\n}));\n\nconst react_1 = __importDefault(__webpack_require__(/*! react */ \"./node_modules/react/index.js\")); // @ts-ignore\n\n\nconst index_less_1 = __importDefault(__webpack_require__(/*! ../index.less */ \"./example/multiple-modules/feature1/_ui/index.less\"));\n\nfunction default_1(props) {\n  return react_1.default.createElement(\"div\", null, react_1.default.createElement(\"h1\", {\n    className: index_less_1.default.red\n  }, props.name), react_1.default.createElement(\"p\", {\n    className: index_less_1.default.green\n  }, \"\\u8FD9\\u662F\\u6A21\\u57571With prettified output\"));\n}\n\nexports[\"default\"] = default_1;\n\n//# sourceURL=webpack://tsx-render/./example/multiple-modules/feature1/_ui/test/index.tsx?");
+  eval("\n\nvar __importDefault = this && this.__importDefault || function (mod) {\n  return mod && mod.__esModule ? mod : {\n    \"default\": mod\n  };\n};\n\nObject.defineProperty(exports, \"__esModule\", ({\n  value: true\n}));\n\nconst react_1 = __importDefault(__webpack_require__(/*! react */ \"./node_modules/react/index.js\")); // @ts-ignore\n\n\nconst index_less_1 = __importDefault(__webpack_require__(/*! ../index.less */ \"./example/multiple-modules/feature2/_ui/index.less\"));\n\nfunction default_1(props) {\n  return react_1.default.createElement(\"div\", null, react_1.default.createElement(\"h1\", {\n    className: index_less_1.default.red\n  }, props.name), react_1.default.createElement(\"p\", {\n    className: index_less_1.default.green\n  }, \"\\u8FD9\\u662F\\u6A21\\u57572With prettified output\"));\n}\n\nexports[\"default\"] = default_1;\n\n//# sourceURL=webpack://tsx-render/./example/multiple-modules/feature2/_ui/test/index.tsx?");
   
   /***/ }),
   
-  /***/ "./example/multiple-modules/feature1/_ui/index.less":
+  /***/ "./example/multiple-modules/feature2/_ui/index.less":
   /*!**********************************************************!*\
-    !*** ./example/multiple-modules/feature1/_ui/index.less ***!
+    !*** ./example/multiple-modules/feature2/_ui/index.less ***!
     \**********************************************************/
   /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
   
-  eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n// extracted by mini-css-extract-plugin\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({\"red\":\"red-b513d\",\"green\":\"green-fd56e\"});\n\n//# sourceURL=webpack://tsx-render/./example/multiple-modules/feature1/_ui/index.less?");
+  eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n// extracted by mini-css-extract-plugin\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({\"red\":\"red-a740c\",\"green\":\"green-e7c0f\"});\n\n//# sourceURL=webpack://tsx-render/./example/multiple-modules/feature2/_ui/index.less?");
   
   /***/ })
   
@@ -120,7 +120,7 @@
   /******/ 	// startup
   /******/ 	// Load entry module and return exports
   /******/ 	// This entry module is referenced by other modules so it can't be inlined
-  /******/ 	var __webpack_exports__ = __webpack_require__("./example/multiple-modules/feature1/_ui/test/index.tsx");
+  /******/ 	var __webpack_exports__ = __webpack_require__("./example/multiple-modules/feature2/_ui/test/index.tsx");
   /******/ 	var __webpack_export_target__ = exports;
   /******/ 	for(var i in __webpack_exports__) __webpack_export_target__[i] = __webpack_exports__[i];
   /******/ 	if(__webpack_exports__.__esModule) Object.defineProperty(__webpack_export_target__, "__esModule", { value: true });

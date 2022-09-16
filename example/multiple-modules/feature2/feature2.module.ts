@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common'
 import { resolve } from 'path'
 import { TsxViewsModule } from '../../../src/nestjs-render/tsx-views.module'
-import { Feature1Controller } from './feature1.controller'
+import { Feature2Controller } from './feature2.controller'
 
 @Module({
   imports: [
@@ -9,9 +9,9 @@ import { Feature1Controller } from './feature1.controller'
       viewsDirectory: resolve(__dirname, './_ui'),
       prettify: true,
 
-      forRoutes: [Feature1Controller],
+      forRoutes: [Feature2Controller],
     }),
   ],
-  controllers: [Feature1Controller],
+  controllers: [Feature2Controller],
 })
-export class Feature1Module {}
+export class Feature2Module {}

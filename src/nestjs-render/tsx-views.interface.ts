@@ -1,6 +1,6 @@
 import { ModuleMetadata, Provider, Type } from '@nestjs/common'
 import { Controller, RouteInfo } from '@nestjs/common/interfaces'
-import { ReactViewsOptions } from './express-tsx-render/react-view-engine.interface'
+import { ReactViewsOptions } from '../express-render/react-view-engine.interface'
 
 export interface TsxViewsModuleOptions extends ReactViewsOptions {
   /**

@@ -89,7 +89,8 @@ export function reactViews(reactViewOptions: ReactViewsOptions) {
 
       const doctype = reactViewOptions.doctype ?? '<!DOCTYPE html>\n'
       const transform = reactViewOptions.transform || ((html) => {
-        const injectCss = generateCssStr('/Users/andyzou/Practice/other-github/ssr/nest-ssr-tsx/build/static/test.css')
+        console.log('html是', html)
+        const injectCss = generateCssStr('/Users/andyzou/Practice/other-github/ssr/nest-ssr-tsx/build/static/index.css')
         const injectScript = ''
         html = `
           ${injectCss}
