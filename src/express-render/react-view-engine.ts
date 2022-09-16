@@ -12,16 +12,7 @@ import {
   ReactViewsOptions,
 } from './react-view-engine.interface'
 import * as fs from 'fs'
-import { getCssStringFromBaseFolderPath, getDirPathFromFullPath } from '../scripts/util'
-
-const generateCssStr = (cssFilePath: string) => {
-  const cssStr = fs.readFileSync(cssFilePath)
-  return `<style>${cssStr}</style>`
-}
-
-export function isTranspiled(): boolean {
-  return require.main?.filename?.endsWith('.js') ?? true
-}
+import { getCssStringFromBaseFolderPath, getDirPathFromFullPath } from '../util'
 
 export function setupReactViews(
   app: Application,
@@ -31,11 +22,6 @@ export function setupReactViews(
     throw new Error('viewsDirectory missing')
   }
 
-  const extension = isTranspiled() ? 'js' : 'tsx'
-
-  // @ts-ignore
-  // app.engine(extension, reactViews(options))
-  // app.set('view engine', extension)
   app.engine('js', reactViews(options))
   app.set('view engine', 'js')
   app.set('views', options.viewsDirectory)
@@ -52,6 +38,7 @@ export function addReactContext<T>(
 }
 
 export function reactViews(reactViewOptions: ReactViewsOptions) {
+  console.log('外部执行了')
   return async function renderFile(
     ...args: EngineCallbackParameters
   ): Promise<void> {

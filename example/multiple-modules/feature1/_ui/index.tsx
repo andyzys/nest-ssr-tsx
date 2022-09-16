@@ -1,6 +1,6 @@
 import React from 'react'
 // @ts-ignore
-import css from '../index.less'
+import css from './index.less'
 
 export default function(props: any) {
   return (

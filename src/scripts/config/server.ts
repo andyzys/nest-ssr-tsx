@@ -1,16 +1,14 @@
 const path = require('path')
-const webpack = require('webpack')
+// const webpack = require('webpack')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+import { getServerConfigEntry } from './util'
+import { SERVER_BUILD_PATH } from '../../common/constant'
 
-const BUILD_PATH = "build/static"
-console.log('!!!!当前目录是：', process.cwd())
-console.log('!!!!输出目录是：', path.join(process.cwd(), BUILD_PATH))
-const getServerWebpack = () => {
+const getServerWebpack = (config: {
+  baseFolder: string
+}) => {
   const serverConfig = {
-    entry: {
-      index: '/Users/andyzou/Practice/other-github/ssr/nest-ssr-tsx/example/multiple-modules/feature1/_ui/test/index.tsx',
-      index2: '/Users/andyzou/Practice/other-github/ssr/nest-ssr-tsx/example/multiple-modules/feature2/_ui/test/index.tsx'
-    },
+    entry: getServerConfigEntry('/Users/andyzou/Practice/other-github/ssr/nest-ssr-tsx/example/multiple-modules'),
     cache: {
       type: "filesystem", 
     },
@@ -19,7 +17,7 @@ const getServerWebpack = () => {
       filename: "[name].js",
       libraryTarget: 'commonjs',
       // globalObject: 'this',
-      path: path.join(process.cwd(), BUILD_PATH),
+      path: path.join(config.baseFolder, SERVER_BUILD_PATH),
     },
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx'],
@@ -91,15 +89,6 @@ const getServerWebpack = () => {
     },
     plugins: [
       new MiniCssExtractPlugin(),
-      // new webpack.DefinePlugin({
-      //   'process.env': {
-      //     NODE_ENV: JSON.stringify('production')
-      //   }
-      // }),
-      // new webpack.ProvidePlugin({
-      //   'React': 'react'
-      // }),
-  
     ]
   }
   return serverConfig
