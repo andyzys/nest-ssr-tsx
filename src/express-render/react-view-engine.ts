@@ -38,7 +38,6 @@ export function addReactContext<T>(
 }
 
 export function reactViews(reactViewOptions: ReactViewsOptions) {
-  console.log('外部执行了')
   return async function renderFile(
     ...args: EngineCallbackParameters
   ): Promise<void> {
@@ -46,7 +45,6 @@ export function reactViews(reactViewOptions: ReactViewsOptions) {
     const { settings, _locals, cache, contexts, ...vars } = options as ExpressRenderOptions
     const folderPathOfFile = getDirPathFromFullPath(filename)
     try {
-      console.log('渲染回调参数是: ', args)
       const Component = (await import(filename)).default
 
       if (!Component) {
