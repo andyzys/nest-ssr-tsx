@@ -14,7 +14,9 @@ function setBuildInfo(content: any) {
 }
 
 function build() {
-  const baseFolder = '/Users/andyzou/Practice/other-github/ssr/nest-ssr-tsx/example/multiple-modules'
+  const index = process.argv.indexOf('--folder')
+  const baseFolder = index === -1 ? `${process.cwd()}/src` : process.argv[index + 1]
+  console.log(`开始编译，编译目录是：${baseFolder}`)
   try {
     const compiler = webpack(getServerWebpack({
       baseFolder: baseFolder
