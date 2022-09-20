@@ -19,6 +19,10 @@ const getServerWebpack = (config: {
       // globalObject: 'this',
       path: path.join(config.baseFolder, SERVER_BUILD_PATH),
     },
+    externals: {
+      react: 'react',
+      'react-dom': 'react-dom'
+    },
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx'],
     },

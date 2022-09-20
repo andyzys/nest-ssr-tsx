@@ -1,7 +1,7 @@
 import { Inject, Injectable, Scope } from '@nestjs/common'
 import { REQUEST } from '@nestjs/core'
 import { Request, Response } from 'express'
-import { addReactContext } from 'express-tsx-views'
+import { addReactContext } from '../express-render/react-view-engine'
 import { Context } from 'react'
 
 @Injectable({ scope: Scope.REQUEST })
