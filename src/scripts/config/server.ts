@@ -8,7 +8,7 @@ const getServerWebpack = (config: {
   baseFolder: string
 }) => {
   const serverConfig = {
-    entry: getServerConfigEntry('/Users/andyzou/Practice/other-github/ssr/nest-ssr-tsx/example/multiple-modules'),
+    entry: getServerConfigEntry(config.baseFolder),
     cache: {
       type: "filesystem", 
     },
