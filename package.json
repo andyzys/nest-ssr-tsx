@@ -1,21 +1,15 @@
 {
-  "name": "tsx-render",
-  "version": "1.2.5",
+  "name": "nestjs-tsx-render",
+  "version": "0.0.1",
   "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "license": "ISC",
   "scripts": {
     "build:test": "tsc --noEmit",
     "build": "tsc --build tsconfig.build.json",
     "clean": "rimraf dist",
-    "lint": "eslint --cache .",
-    "prebuild": "yarn clean",
     "compile:example": "ts-node --files src/scripts/compile.ts --folder example/multiple-modules",
     "start:basic": "nodemon  --exec ts-node --files example/basic/main.ts",
-    "start:multiple-modules": "nodemon  --exec ts-node --files example/multiple-modules/main.ts",
-    "test": "jest",
-    "_postinstall": "is-ci || husky install",
-    "prepublish": "pinst --disable",
-    "postpublish": "pinst --enable"
+    "start:multiple-modules": "nodemon  --exec ts-node --files example/multiple-modules/main.ts"
   },
   "devDependencies": {
     "@babel/core": "^7.19.1",
