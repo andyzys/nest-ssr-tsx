@@ -1,6 +1,5 @@
 import { Application } from 'express'
 import { Context } from 'react'
-import { TsxRenderMiddleware } from './handler'
 
 export interface ReactViewsOptions {
   /**
@@ -29,8 +28,6 @@ export interface ReactViewsOptions {
    * `string`.
    */
   transform?: (html: string) => string | Promise<string>
-
-  middlewares?: TsxRenderMiddleware[]
 }
 
 export type EngineCallbackParameters = Parameters<
