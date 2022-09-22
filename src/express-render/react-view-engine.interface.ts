@@ -7,7 +7,7 @@ export interface ReactViewsOptions {
    * The directory where your views (`.tsx` files) are stored. Must be
    * specified.
    */
-  viewsDirectory: string
+  viewsDirectory?: string
 
   /**
    * [Doctype](https://developer.mozilla.org/en-US/docs/Glossary/Doctype) to

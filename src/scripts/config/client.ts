@@ -1,14 +1,14 @@
 const path = require('path')
 // const webpack = require('webpack')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-import { getServerConfigEntry } from './util'
-import { SERVER_BUILD_PATH } from '../../common/constant'
+// import { getServerConfigEntry } from './util'
+import { CLIENT_BUILD_PATH } from '../../common/constant'
 
-const getServerWebpack = (config: {
+const getClientWebpack = (config: {
   baseFolder: string
 }) => {
   const serverConfig = {
-    entry: getServerConfigEntry(config.baseFolder),
+    // entry: getServerConfigEntry(config.baseFolder),
     cache: {
       type: "filesystem", 
     },
@@ -17,7 +17,7 @@ const getServerWebpack = (config: {
       filename: "[name].js",
       libraryTarget: 'commonjs',
       // globalObject: 'this',
-      path: path.join(config.baseFolder, SERVER_BUILD_PATH),
+      path: path.join(config.baseFolder, CLIENT_BUILD_PATH),
     },
     externals: {
       react: 'react',
@@ -93,12 +93,15 @@ const getServerWebpack = (config: {
       ]
     },
     plugins: [
-      new MiniCssExtractPlugin(),
+      new MiniCssExtractPlugin({
+        filename: "[name].[contenthash:6].css",
+        chunkFilename: "[id].[contenthash:6].css",
+      }),
     ]
   }
   return serverConfig
 }
 
 export {
-  getServerWebpack
+  getClientWebpack
 }

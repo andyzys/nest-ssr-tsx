@@ -1,9 +1,9 @@
 import { Controller, Get, Render } from '@nestjs/common'
 
-@Controller('/feature1')
-export class Feature1Controller {
+@Controller('/feature2')
+export class Feature2Controller {
   @Get()
-  @Render('index')
+  @Render('feature2')
   index() {
     return { name: 'Hello' }
   }

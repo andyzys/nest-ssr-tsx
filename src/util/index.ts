@@ -35,7 +35,6 @@ const getDirPathFromFullPath = (fullPath: string) => {
 
 const scanUIAssets = (projectFolder: string): Record<string, {fileName: string, fullPath: string}> => {
   const uiPathMap: any = {}
-
   const _judge = (name: string, baseFolder: string) => {
     const currentPath = path.join(baseFolder, name)
     const isDirectory = fs.statSync(currentPath).isDirectory();

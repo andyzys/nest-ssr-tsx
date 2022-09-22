@@ -1,0 +1,16 @@
+/*!****************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/less-loader/dist/cjs.js!./example/multiple-modules/feature1/_ui/EditorMeta.less ***!
+  \****************************************************************************************************************************************************************************/
+.edt-c619c {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+}
+.ant-list-item {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+.ant-list-item-action {
+  margin-left: 0;
+}
+

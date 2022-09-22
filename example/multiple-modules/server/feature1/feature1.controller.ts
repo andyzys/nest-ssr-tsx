@@ -1,0 +1,530 @@
+import { Controller, Get, Render } from '@nestjs/common'
+
+@Controller('/feature1')
+export class Feature1Controller {
+  @Get()
+  @Render('feature1')
+  index() {
+    return {
+      file: {
+        id: 20972,
+        uri: "/kh5/rtx-zys/OWgRdJdrWhrx",
+        name: '通用主播榜单模板(来自分享)',
+      },
+      defaultChannelDeliveryList: [
+        {
+            "title": "主站首页",
+            "desc": "主站",
+            "children": [
+                {
+                    "title": "第四Tab",
+                    "desc": "首屏第四Tab",
+                    "identification": "vFRwEEbxUu"
+                },
+                {
+                    "title": "侧边栏第一位-主站",
+                    "desc": "侧边栏第一位-主站",
+                    "identification": "pZhuZhan"
+                },
+                {
+                    "title": "侧边栏第一位-极速版",
+                    "desc": "侧边栏第一位-极速版",
+                    "identification": "pJiShuBan"
+                },
+                {
+                    "title": "侧边栏第二位大家都在看-弹窗",
+                    "desc": "强提醒",
+                    "identification": "WSAQyBnbrz"
+                },
+                {
+                    "title": "侧边栏第二位大家都在看-精选推荐banner",
+                    "desc": "侧边栏第二位大家都在看-精选推荐banner",
+                    "identification": "xgbNYqmOqv"
+                },
+                {
+                    "title": "侧边栏第二位大家都在看-挂件",
+                    "desc": "新增，高ROI",
+                    "identification": "iHAFzSiokS"
+                },
+                {
+                    "title": "私信",
+                    "desc": "私信",
+                    "identification": "pPrivate"
+                },
+                {
+                    "title": "push",
+                    "desc": "push",
+                    "identification": "ppush"
+                },
+                {
+                    "title": "快手小店侧边栏红点",
+                    "desc": "快手小店侧边栏红点",
+                    "identification": "pRedPoint"
+                },
+                {
+                    "title": "主站首页挂件",
+                    "desc": "主站首页挂件",
+                    "identification": "dPUyqFYRNQ"
+                },
+                {
+                    "title": "高亮标签/话题banner",
+                    "desc": "高亮标签/话题banner",
+                    "identification": "pIBanner"
+                },
+                {
+                    "title": "极速版首页挂件",
+                    "desc": "极速版首页挂件",
+                    "identification": "gsxxNZRmEE"
+                },
+                {
+                    "title": "主站关注页/发现页-直播间角标",
+                    "desc": "主站关注页/发现页-直播间角标",
+                    "identification": "pfollowLive"
+                },
+                {
+                    "title": "分享回流",
+                    "desc": "分享回流",
+                    "identification": "pshare"
+                },
+                {
+                    "title": "儿童节玩法",
+                    "desc": "儿童节玩法",
+                    "identification": "petjwf"
+                }
+            ]
+        },
+        {
+            "title": "极速版赚钱页",
+            "desc": "极速版赚钱页",
+            "children": [
+                {
+                    "title": "banner",
+                    "desc": "banner",
+                    "identification": "pmBanner"
+                },
+                {
+                    "title": "弹窗",
+                    "desc": "弹窗",
+                    "identification": "pjiShuPop"
+                },
+                {
+                    "title": "任务列表",
+                    "desc": "任务列表",
+                    "identification": "pmTask"
+                },
+                {
+                    "title": "搜素首页-1tab-banner入口",
+                    "desc": "搜素首页-1tab-banner入口",
+                    "isSearch": 1,
+                    "identification": "vmfHyDqCSj"
+                },
+                {
+                    "title": "侧边栏第二位大家都在看-精选推荐banner",
+                    "desc": "首屏第四Tab",
+                    "identification": "oGVzTuMVgK"
+                }
+            ]
+        },
+        {
+            "title": "搜索",
+            "desc": "搜索",
+            "children": [
+                {
+                    "title": "搜索结果页-1tab——主会场内嵌",
+                    "desc": "搜索结果页-1tab——主会场内嵌",
+                    "isSearch": 1,
+                    "identification": "psTab"
+                },
+                {
+                    "title": "搜索结果页——kbox",
+                    "desc": "搜索结果页——kbox",
+                    "identification": "JdhGtqDwlo"
+                },
+                {
+                    "title": "query综搜页banner",
+                    "desc": "query综搜页banner",
+                    "identification": "CofHcyVevW"
+                },
+                {
+                    "title": "侧边栏第二位大家都在看-精选推荐banner",
+                    "desc": "首屏第四Tab",
+                    "identification": "oGVzTuMVgK"
+                }
+            ]
+        },
+        {
+            "title": "电商",
+            "desc": "电商",
+            "children": [
+                {
+                    "title": "买首弹窗",
+                    "desc": "买首弹窗",
+                    "identification": "pBuyFirst"
+                },
+                {
+                    "title": "买首右下角挂件",
+                    "desc": "买首右下角挂件",
+                    "identification": "pBuyRight"
+                },
+                {
+                    "title": "直播间右下角挂件",
+                    "desc": "直播间右下角挂件",
+                    "isKwai": 1,
+                    "isHalf": 1,
+                    "identification": "pRPendant"
+                },
+                {
+                    "title": "直播间左上角挂件",
+                    "desc": "直播间左上角挂件",
+                    "isHalf": 1,
+                    "identification": "pliveCA"
+                },
+                {
+                    "title": "快手小店氛围",
+                    "desc": "快手小店氛围",
+                    "identification": "psAtm"
+                },
+                {
+                    "title": "快手小店双列标",
+                    "desc": "快手小店双列标",
+                    "identification": "psDouble"
+                },
+                {
+                    "title": "小黄车氛围",
+                    "desc": "小黄车氛围",
+                    "identification": "patmosphere"
+                },
+                {
+                    "title": "小黄车动效标",
+                    "desc": "小黄车动效标",
+                    "identification": "pdynamic"
+                },
+                {
+                    "title": "儿童节电商活动页",
+                    "desc": "儿童节电商活动页",
+                    "identification": "QHTqErLs"
+                }
+            ]
+        },
+        {
+            "title": "通用",
+            "desc": "通用",
+            "children": [
+                {
+                    "title": "通用链接1",
+                    "desc": "通用链接1",
+                    "identification": "ycjtKbZrGt"
+                },
+                {
+                    "title": "通用链接2",
+                    "desc": "通用链接2",
+                    "identification": "JydpFSycAy"
+                }
+            ]
+        }
+      ],
+      defaultAppNameMap: {
+            "qvioQQISzyuU": "20211111",
+            "aHUTWJYRKVOp": "20211111",
+            "jBUAjmRZelzN": "20211111",
+            "zWLQWZfGuiaC": "20211111",
+            "OQLcWYmhJosk": "20211111",
+            "qnKRHMxCdjWU": "20211111",
+            "mjRrXmCtfEov": "20211212",
+            "tAaBstRNwQqC": "20211212",
+            "DiRTOJkxuhpA": "20211212",
+            "KnklMPuUjRKF": "20211212",
+            "jpkHTvGXEvqM": "2022NYG",
+            "ERLZEdlaqHJk": "2022NYG",
+            "IydFdVcDWTVb": "2022NYG",
+            "ZoqFpQbfHrLY": "2022NYG",
+            "SVIYIrvVsmAZ": "2022NYG",
+            "PiKBqjColELn": "2022NYG",
+            "xwHGdRdUpItF": "2022NYG",
+            "cOmSyMCLfeVO": "2022MERCHANTCNY",
+            "vFPdpnjCBczb": "2022MERCHANTCNY",
+            "VREvcjifEApA": "2022MERCHANTCNY",
+            "PjsffeuDyIvv": "2022MERCHANTCNY",
+            "rAFanreIejzA": "2022MERCHANTCNY",
+            "lMCOVWjFQQod": "2022MERCHANTCNY",
+            "BtHMJxsVsioM": "wd20220308",
+            "WfNDhbgZMoSN": "wd20220308",
+            "hCSTFhbeRQpR": "wd20220308",
+            "bBANdGsVfanu": "wd20220308",
+            "eZirWlZPnRRc": "wd20220308",
+            "EkjusTnjeWNg": "wd20220308",
+            "opZwESiUTbPi": "wd20220308",
+            "cfoBSsltJshu": "hy20220323",
+            "JsmKovBhDJcT": "hy20220323",
+            "swpwwvVOMgYl": "hy20220323",
+            "hScqknBAKSwU": "hy20220323",
+            "WFjtVAzjejzv": "hy20220323",
+            "MZtAncnZNvhI": "hy20220323",
+            "sLUThLdffdIG": "th20220425",
+            "HnQEDqyBFzSg": "th20220425",
+            "jsfKBIPDZgZP": "20220616",
+            "zfkBakprXKHA": "20220616",
+            "lNuCRYTBhgnj": "20220616",
+            "iMmMaQuwzRHJ": "20220616",
+            "IbJmxJuQNbLQ": "20220616",
+            "gIFrjskjqIsg": "20220616",
+            "hdbHIiOjhFAF": "20220616",
+            "WcRNVrTAYZkb": "20220616",
+            "OosiqBGdsVvY": "20220616",
+            "xVwsEwgzaSnz": "20220616",
+            "XsSzDrsmOsER": "20220616",
+            "zveaqKuSkrEV": "20220616",
+            "EorcUvIPYvTv": "20220616",
+            "nwjfOruJfnyk": "20220616",
+            "CNAZSgVQrIuE": "20220616",
+            "nGCvtYyAAyxE": "20220616",
+            "gOiWTEIaECPk": "20220616",
+            "PoywrQfcElfi": "20220616",
+            "BoEoBJTNLtii": "20220616",
+            "EFeszJjRiWxj": "20220616",
+            "laHMDjOMxKHA": "20220616",
+            "KIyVkQVapaDr": "20220616",
+            "7ew92623ex": "fyn35bc2f4",
+            "tmfkciztcn": "20220616",
+            "ar7drbkc2t": "20220616",
+            "raa3mih53a": "20220616",
+            "cc9ihxpe8a": "pdxs87c6md",
+            "eh2ef9rpk2": "pdxs87c6md",
+            "b48fyezji2": "pdxs87c6md",
+            "pw7e0nehy1": "pdxs87c6md",
+            "iixbpw5nke": "pdxs87c6md",
+            "4nxih3a1kj": "pdxs87c6md",
+            "3nsbbrzbrw": "pdxs87c6md",
+            "whfcnb014p": "pdxs87c6md",
+            "pb26ya3h10": "pdxs87c6md",
+            "8c4bb04saw": "pdxs87c6md",
+            "4aybi3j9dc": "pdxs87c6md",
+            "5yim6npa29": "j1z71xithm",
+            "tdnfa0a3ep": "pdxs87c6md",
+            "arzayd8njs": "pdxs87c6md",
+            "bpbxkswrks": "pdxs87c6md",
+            "3cikxkdm59": "pdxs87c6md",
+            "f3n20bm5kh": "pdxs87c6md",
+            "xibxspsmz8": "20211212",
+            "jfn2c9fjf9": "20211212",
+            "k8tkesaj0t": "20211212",
+            "pjea9mcn4y": "20211212",
+            "th9ty1i1jz": "20211212",
+            "t2n7589e1d": "20211212",
+            "rj7nwpjnic": "20211212",
+            "07eniefa37": "20211212",
+            "2w69whemww": "20211212",
+            "8x865d4int": "20211212",
+            "t9edepzh33": "20211212",
+            "rx6hh79t2a": "fyn35bc2f4",
+            "82pwdynm9k": "d2w6hrhs6y",
+            "mpw6xe7tti": "f18xmm0is0",
+            "3b65f8fjes": "f18xmm0is0",
+            "6pbnx216ax": "f18xmm0is0",
+            "6yikrhaein": "f18xmm0is0",
+            "ywtk65ms9m": "f18xmm0is0",
+            "ni0p1attcs": "s1kcs33ynw",
+            "h02cy30atp": "s1kcs33ynw",
+            "rha63684mj": "f18xmm0is0",
+            "58hxadw94y": "fyn35bc2f4",
+            "rre2mj51sh": "m2m4m401j2",
+            "x0ifnysdri": "f18xmm0is0",
+            "wkseew49mz": "m2m4m401j2",
+            "hh3p1nfif0": "m2m4m401j2",
+            "yi8e23r2mf": "m2m4m401j2",
+            "k0nyxc43zm": "m2m4m401j2",
+            "knxaf5zcxa": "fyn35bc2f4",
+            "1et7zwfk5c": "m2m4m401j2",
+            "nz1xda4a4h": "f18xmm0is0",
+            "wfccx75dhc": "f18xmm0is0",
+            "eyp5nr51ek": "xp1abjet6s",
+            "hi0rk8d359": "xp1abjet6s",
+            "ynkrmrj338": "xp1abjet6s",
+            "5zwem54t7t": "fzpwx74jjd",
+            "fe31t60xxn": "fzpwx74jjd",
+            "k5n90bbay5": "f18xmm0is0",
+            "09f33m6jxr": "xkefda6czh",
+            "2w1f3ek8i4": "xkefda6czh",
+            "5dxpm11c95": "xkefda6czh",
+            "3k6k39zrdw": "f18xmm0is0",
+            "r8hs4m8ibm": "fyn35bc2f4",
+            "3sj0ed7d4s": "m2m4m401j2",
+            "9npm9m6nj9": "m2m4m401j2",
+            "037ms2n5kx": "f18xmm0is0",
+            "17nxtp78rj": "f18xmm0is0",
+            "b84ipexakm": "f18xmm0is0",
+            "ddmfp2jhxc": "m2m4m401j2",
+            "smcjbbhj4y": "m2m4m401j2",
+            "i5pscm2fwa": "ynpzc7k2me",
+            "RXUThuYGlSKJ": "2022bh",
+            "qvejcQywmFxS": "2022bh",
+            "oNwHzVEQSvGp": "2022bh",
+            "beIUDYKRbDWY": "2022bh",
+            "sihfaxm4r0": "hjtkss67ze",
+            "47r8t9d3wz": "73cpjkmkz3",
+            "k6kf5mkpys": "jrf75t9x51",
+            "7n2n62xpec": "99m40ic9h4",
+            "7ayxhhnxjn": "99m40ic9h4",
+            "hbtpwaj0kd": "8zitamyw63",
+            "0r37m2yk0y": "8zitamyw63",
+            "7id9xmppai": "dthd7xba6w",
+            "mff8adbn5w": "m2m4m401j2",
+            "3mr5xmy33r": "m89n5xj7y9",
+            "016ftb6xhs": "r767d3iy8t",
+            "a2h584kiwy": "tfy96hnpw3",
+            "0hsxttewy8": "tfy96hnpw3",
+            "c3ctemffzb": "tfy96hnpw3",
+            "m64jfkadyh": "tfy96hnpw3",
+            "n4wbcwst50": "tfy96hnpw3",
+            "wccjw251zw": "tfy96hnpw3",
+            "ktit7w3bdp": "tfy96hnpw3",
+            "0ase67xyfi": "tfy96hnpw3",
+            "p9mnr2t8ni": "tfy96hnpw3",
+            "w5x016x9t0": "tfy96hnpw3",
+            "6y97dr9n5i": "1h2s8bjtts",
+            "c9wmt84xs7": "51f3i8xsfp",
+            "hza6bw1p2i": "dnpsc9x6nj",
+            "0zxkisd287": "dnpsc9x6nj",
+            "8028iisccs": "685b1js2c5",
+            "it4395n4y7": "685b1js2c5",
+            "462hjxxz23": "79dn3n12kz",
+            "5psf5d668t": "0s9kp72k3a",
+            "fa7t7sfbt1": "5539f6ssa4",
+            "at3f032hd0": "jrf75t9x51",
+            "n2km8dbw8m": "5e35838a3x",
+            "8sjynd0it3": "baz09whk0y",
+            "4p2p65rah3": "baz09whk0y",
+            "66wc7ewayj": "2pzmrmw197",
+            "x995wjerx1": "5jrtx8jkte",
+            "npzadh8fxp": "t78bzd8fp7",
+            "faict0k2em": "5d6c0bnst9",
+            "0cmdhh4ewm": "6htfakp2re",
+            "enphyjzain": "hhba6r6ymd",
+            "1rnjidzyz8": "605enmr3z4",
+            "wmb3jpr1xs": "xp4z6fzh16",
+            "1tjpzbmd5t": "xp4z6fzh16",
+            "35pdr3bty1": "xp4z6fzh16",
+            "h78f8w4est": "t78bzd8fp7",
+            "mszzj3h94r": "whhhw7i15k",
+            "bwjt9nk72z": "99embi9caw",
+            "1516zze3be": "99embi9caw",
+            "9mzcacid5w": "99embi9caw",
+            "n14micm1hr": "99embi9caw",
+            "cxhx6f6sb7": "20220818",
+            "acf7ni491k": "20220818",
+            "dr7f59yahf": "20220818",
+            "64i1xistnc": "6dw637pe3h",
+            "da8sjz7n34": "xx9kejyh9i",
+            "1sye584rj5": "d57awb7ihn",
+            "6fcknzrj2w": "20220818",
+            "xmdeh5fsj4": "20220818",
+            "r7ydn5n4di": "20220818",
+            "raiKiFrPsEiF": "2022bh",
+            "nyyh8nnc3m": "20220818",
+            "dc33wd5152": "20220818",
+            "h8kb24hfwm": "20220818",
+            "wyx9x1tj57": "20220818",
+            "sn1mtfx63f": "8zitamyw63",
+            "tfs97nmd9n": "8zitamyw63",
+            "fsscdtnh3j": "h419n854ft",
+            "f2m50d9zxd": "m4n0597kzy",
+            "em9467kbne": "m4n0597kzy",
+            "4dt654zd49": "m4n0597kzy",
+            "fbixt54n0d": "n8fhtsipch",
+            "d5zy85cpx4": "526d12wd44",
+            "4se6f8nb0z": "n03emysbkh",
+            "jwe0zz4txz": "n03emysbkh",
+            "hiadn6jjbw": "wpf65fs7dn",
+            "thtb0h3dks": "wpf65fs7dn",
+            "h0rkdc22sj": "59db9iz813",
+            "j42t9w2879": "59db9iz813",
+            "ap8fjet934": "59db9iz813",
+            "yd9461brtt": "20220818",
+            "haj3srtm51": "rf5jna8ffj",
+            "zcx7char4j": "rf5jna8ffj",
+            "tac4ri7ex7": "rf5jna8ffj",
+            "kk9rfrb44r": "rf5jna8ffj",
+            "jz3xj09ixw": "FZACTIVITY2021",
+            "88ea584exi": "FZACTIVITY2021",
+            "tanckzcik6": "MERCHANT_95cpdk28a8",
+            "smb6zk5m3e": "MERCHANT_95cpdk28a8",
+            "sy3i20yi55": "MERCHANT_95cpdk28a8",
+            "k4e6mfiia3": "rf5jna8ffj",
+            "i0k85ynczf": "MERCHANT_as99sfhdz3",
+            "0wy21569wt": "MERCHANT_as99sfhdz3",
+            "nxmyw316ni": "MERCHANT_ntyf27009j",
+            "45ecfstd6z": "FZACTIVITY2021",
+            "0iy6j176wn": "MERCHANT_3cx3ihm8bc",
+            "abwwjnhmhd": "MERCHANT_3cx3ihm8bc",
+            "e9ac5pntzx": "526d12wd44",
+            "phak0f1kmd": "MERCHANT_rf9s61k8ck",
+            "fy6fhraxch": "MERCHANT_rf9s61k8ck",
+            "5ntdmn6s0f": "MERCHANT_xct1isb7z1",
+            "d38ptims5d": "MERCHANT_6a6bdmttnf",
+            "ikwdjzj4h7": "MERCHANT_rf9s61k8ck",
+            "4pm3cpx6s7": "MERCHANT_rf9s61k8ck",
+            "kyf5p04z3e": "MERCHANT_w9ithhk5p2",
+            "d990h1wjf4": "MERCHANT_9pj7x3ir59",
+            "7wp4h10jaw": "MERCHANT_rf9s61k8ck",
+            "ath4xtj3rn": "MERCHANT_ntyf27009j",
+            "kxmrfm6t0d": "MERCHANT_ntyf27009j",
+            "taw19218rh": "MERCHANT_rf9s61k8ck",
+            "mye44fxmj7": "MERCHANT_ntyf27009j",
+            "18z0zpcya0": "MERCHANT_89779",
+            "b8iswbf27p": "MERCHANT_89779",
+            "x0zr1wpj6j": "MERCHANT_20161106",
+            "15tj0s91jc": "MERCHANT_rf9s61k8ck",
+            "nbaka9jfee": "MERCHANT_20161106",
+            "nd27k8p14a": "MERCHANT_20161106",
+            "fmeeipe8m5": "MERCHANT_20162222",
+            "hnr0bcc078": "MERCHANT_20162222",
+            "7b71wd697d": "MERCHANT_11111",
+            "9rcmim1p2n": "MERCHANT_11111",
+            "1h0wremb6t": "MERCHANT_t0npxrtk8z",
+            "5wtwat1sdi": "MERCHANT_t0npxrtk8z",
+            "68yei7m4th": "MERCHANT_rf9s61k8ck",
+            "amrdm7w12y": "MERCHANT_rf9s61k8ck",
+            "6jcy5wp2zp": "MERCHANT_rf9s61k8ck",
+            "imi4hzy878": "MERCHANT_rf9s61k8ck",
+            "391sf60yjs": "MERCHANT_rf9s61k8ck",
+            "i9miyynpnf": "MERCHANT_rf9s61k8ck",
+            "er444p08s4": "MERCHANT_rf9s61k8ck",
+            "e2werc8zw2": "MERCHANT_rf9s61k8ck",
+            "sfk3skrzcn": "MERCHANT_20220908",
+            "5aacykfxd2": "MERCHANT_20220908",
+            "mp8wn5nzh6": "MERCHANT_ntyf27009j",
+            "y2s27cbsdw": "MERCHANT_rf9s61k8ck",
+            "fic00k333n": "MERCHANT_rf9s61k8ck",
+            "20py11n6y4": "MERCHANT_rf9s61k8ck",
+            "7pzaazmcs2": "59db9iz813",
+            "0xws2br67e": "MERCHANT_111222",
+            "f4be6bt8dy": "MERCHANT_111222",
+            "hne0njspei": "MERCHANT_t0npxrtk8z",
+            "ww1e052p0a": "MERCHANT_t0npxrtk8z",
+            "zes86c91by": "MERCHANT_t0npxrtk8z",
+            "krw25pzwf1": "MERCHANT_t0npxrtk8z",
+            "47famj1n9e": "MERCHANT_t0npxrtk8z",
+            "wfi5ak435y": "MERCHANT_t0npxrtk8z",
+            "sdet7wksds": "MERCHANT_MCY2022-09-07TEST",
+            "ci4th98cnw": "MERCHANT_ntyf27009j",
+            "26idc4wh5s": "MERCHANT_rf9s61k8ck",
+            "wj1tzjb17n": "59db9iz813",
+            "pc0h3c83i6": "MERCHANT_rf9s61k8ck",
+            "31fhkfxszx": "MERCHANT_rf9s61k8ck",
+            "1tzmxz7f6t": "MERCHANT_w9ithhk5p2",
+            "jnaby94p2i": "MERCHANT_rf9s61k8ck",
+            "rchb3mit13": "MERCHANT_ntyf27009j",
+            "imsptwhzzt": "MERCHANT_ntyf27009j",
+            "tch7rzje7t": "MERCHANT_ntyf27009j",
+            "bpTAmhheDymf": "MERCHANT_2022116",
+            "i44dsd0c5z": "MERCHANT_2022116",
+            "sci6wmh0rw": "MERCHANT_2022116",
+            "4ty6wr70w8": "MERCHANT_2022116",
+            "7bep799nwx": "MERCHANT_rf9s61k8ck",
+            "7xsykrb0dc": "MERCHANT_ntyf27009j",
+            "9xr9pxzzff": "MERCHANT_20220920",
+            "zjpdxa0rdn": "MERCHANT_ntyf27009j"
+      }
+    }
+  }
+}

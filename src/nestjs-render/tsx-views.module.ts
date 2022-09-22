@@ -14,6 +14,7 @@ import {
 } from './tsx-views.interface'
 import { TsxViewsMiddleware } from './tsx-views.middleware'
 import { TsxViewsService } from './tsx-views.service'
+import * as path from 'path'
 
 @Module({})
 export class TsxViewsModule implements NestModule {
@@ -34,7 +35,9 @@ export class TsxViewsModule implements NestModule {
       providers: [
         {
           provide: TSX_VIEWS_OPTIONS,
-          useValue: options,
+          useValue: Object.assign({}, options, {
+            viewsDirectory: path.resolve(process.cwd(), './buildfe'),
+          }),
         },
       ],
     }

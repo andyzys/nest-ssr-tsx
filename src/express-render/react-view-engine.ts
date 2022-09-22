@@ -44,6 +44,7 @@ export function reactViews(reactViewOptions: ReactViewsOptions) {
     const [filename, options, next] = args
     const { settings, _locals, cache, contexts, ...vars } = options as ExpressRenderOptions
     const folderPathOfFile = getDirPathFromFullPath(filename)
+    console.log('@@@@@', vars)
     try {
       const Component = (await import(filename)).default
 
@@ -81,11 +82,23 @@ export function reactViews(reactViewOptions: ReactViewsOptions) {
           accu += cssStrWithTag
           return accu
         }, '')
-        const injectScript = ''
+        const injectCssTag = `
+          <link
+            rel="stylesheet"
+            type="text/css"
+            href="//f2.eckwai.com/udata/pkg/eshop/fangzhou/pub/pkg/antd-4.16.13/dist/antd.min.css"
+          />
+        `
+        const injectScriptTag = `
+          <script crossorigin="anonymous" src="//f2.eckwai.com/udata/pkg/eshop/fangzhou/pub/pkg/react@17.0.2/umd/react.production.min.js"></script>
+          <script crossorigin="anonymous" src="//f2.eckwai.com/udata/pkg/eshop/fangzhou/pub/pkg/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+          <script crossorigin="anonymous" src="//f2.eckwai.com/udata/pkg/eshop/fangzhou/pub/pkg/antd-4.16.13/dist/antd.min.js"></script>
+        `
         html = `
+          ${injectCssTag}
           ${injectCss}
+          ${injectScriptTag}
           ${html}
-          ${injectScript}
         `
         return html
       })
