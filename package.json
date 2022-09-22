@@ -1,6 +1,6 @@
 {
   "name": "nestjs-tsx-render",
-  "version": "0.0.1",
+  "version": "0.0.1-beta.3",
   "main": "dist/index.js",
   "license": "ISC",
   "scripts": {
@@ -10,7 +10,7 @@
     "compile:example": "cd example/multiple-modules && npx ts-node --files ../../src/scripts/compile.ts",
     "start:basic": "nodemon --exec ts-node --files example/basic/main.ts",
     "start:multiple-modules": "cd example/multiple-modules && nodemon  --exec ts-node --files ./server/main.ts",
-    "publish": "yarn clean && yarn build && npm publish --registry https://registry.npmjs.org"
+    "publishToNpm": "yarn clean && yarn build && npm publish --registry https://registry.npmjs.org"
   },
   "devDependencies": {
     "@babel/core": "^7.19.1",
@@ -66,8 +66,5 @@
     "react-dom": ">= 17.0.1",
     "reflect-metadata": "^0.1.2"
   },
-  "dependencies": {
-    "antd": "^4.23.2",
-    "prettier": "^2.0.5"
-  }
+  "dependencies": {}
 }
