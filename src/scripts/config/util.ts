@@ -11,6 +11,7 @@ const getServerConfigEntry = (projectFolder: string) => {
   }
   return entry
 }
+
 export {
   getServerConfigEntry
 }

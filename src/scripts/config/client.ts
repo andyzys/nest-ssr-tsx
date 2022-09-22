@@ -1,27 +1,22 @@
 const path = require('path')
-// const webpack = require('webpack')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-// import { getServerConfigEntry } from './util'
 import { CLIENT_BUILD_PATH } from '../../common/constant'
 
 const getClientWebpack = (config: {
   baseFolder: string
 }) => {
   const serverConfig = {
-    // entry: getServerConfigEntry(config.baseFolder),
     cache: {
       type: "filesystem", 
     },
     mode: "development",// "production" | "development" | "none"
     output: {
       filename: "[name].js",
-      libraryTarget: 'commonjs',
-      // globalObject: 'this',
       path: path.join(config.baseFolder, CLIENT_BUILD_PATH),
     },
     externals: {
-      react: 'react',
-      'react-dom': 'react-dom',
+      react: 'React',
+      'react-dom': 'ReactDOM',
       'antd': 'antd'
     },
     resolve: {

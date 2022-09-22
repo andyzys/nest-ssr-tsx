@@ -1,11 +1,6 @@
 import { Application, Response } from 'express'
 import { Context } from 'react'
 import {
-  CreateReactContextRenderMiddleware,
-  DefaultTsxRenderMiddleware,
-  TsxRenderContext,
-} from './handler'
-import {
   EngineCallbackParameters,
   ExpressRenderOptions,
   ReactViewsContext,
@@ -13,6 +8,7 @@ import {
 } from './react-view-engine.interface'
 import * as fs from 'fs'
 import { getCssStringFromBaseFolderPath, getDirPathFromFullPath } from '../util'
+import { INJECT_DATA_SCRIPT_ID } from '../common/constant'
 
 export function setupReactViews(
   app: Application,
@@ -42,41 +38,15 @@ export function reactViews(reactViewOptions: ReactViewsOptions) {
     ...args: EngineCallbackParameters
   ): Promise<void> {
     const [filename, options, next] = args
-    const { settings, _locals, cache, contexts, ...vars } = options as ExpressRenderOptions
+    const { settings, _locals, cache, contexts, ...userVars } = options as ExpressRenderOptions
     const folderPathOfFile = getDirPathFromFullPath(filename)
-    console.log('@@@@@', vars)
     try {
-      const Component = (await import(filename)).default
-
-      if (!Component) {
-        throw new Error(`Module ${filename} does not have a default export`)
-      }
-
-      let context = new TsxRenderContext(Component, vars)
-
-      const defaultRenderer = new DefaultTsxRenderMiddleware()
-
-      const middlewares = reactViewOptions.middlewares ?? []
-
-      contexts?.forEach(([Context, props]) => {
-        middlewares.push(new CreateReactContextRenderMiddleware(Context, props))
-      })
-
-      context = defaultRenderer.createElement(context)
-
-      if (!context.hasElement()) {
-        throw new Error('element was not created')
-      }
-
-      context = await defaultRenderer.render(context)
-
-      if (!context.isRendered) {
-        throw new Error('element was not rendered')
-      }
-
-      const doctype = reactViewOptions.doctype ?? '<!DOCTYPE html>\n'
+      console.log('@@@@@', userVars, filename)
+      const rawComponentStr = `
+        <script id="${INJECT_DATA_SCRIPT_ID}" data-obj="${encodeURIComponent(JSON.stringify(userVars))}"></script>
+        <script>${fs.readFileSync(filename, 'utf-8')}</script>
+      `
       const transform = reactViewOptions.transform || ((html) => {
-        
         const injectCssList = getCssStringFromBaseFolderPath(folderPathOfFile)
         const injectCss = injectCssList.reduce((accu: string, cssStrWithTag: string) => {
           accu += cssStrWithTag
@@ -95,14 +65,21 @@ export function reactViews(reactViewOptions: ReactViewsOptions) {
           <script crossorigin="anonymous" src="//f2.eckwai.com/udata/pkg/eshop/fangzhou/pub/pkg/antd-4.16.13/dist/antd.min.js"></script>
         `
         html = `
-          ${injectCssTag}
-          ${injectCss}
-          ${injectScriptTag}
-          ${html}
+          <!DOCTYPE html>
+          <html lang="zh-CN" class="no-js">
+            <head>
+              ${injectCssTag}
+              ${injectCss}
+              ${injectScriptTag}
+            </head>
+            <body>
+              ${html}
+            </body>
+          </html>   
         `
         return html
       })
-      next(null, await transform(doctype + context.html!))
+      next(null, await transform(rawComponentStr))
     } catch (error) {
       next(error)
     }

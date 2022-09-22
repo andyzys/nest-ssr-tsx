@@ -114,3 +114,4 @@ e2e/videos
 
 dist
 buildfe
+.tmp

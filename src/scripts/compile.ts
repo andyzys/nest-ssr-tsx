@@ -2,15 +2,37 @@ const webpack = require('webpack')
 const { getClientWebpack } = require('./config/index')
 const path = require('path')
 const fs = require('fs')
-import { CLIENT_BUILD_PATH } from '../common/constant'
+import { CLIENT_BUILD_PATH, BUILD_TEMP_FOLDER_NAME } from '../common/constant'
+import { wrapClientConfig } from './entry/util'
+
+function initTempFolder({ baseFolder }: any) {
+  const tmpFolder = path.join(baseFolder, `./${BUILD_TEMP_FOLDER_NAME}`)
+  if(!fs.existsSync(tmpFolder)) {
+    fs.mkdirSync(tmpFolder)
+  }
+}
+
+function clearTempFolder({ baseFolder }: any) {
+  const tmpFolder = path.join(baseFolder, `./${BUILD_TEMP_FOLDER_NAME}`)
+  if(fs.existsSync(tmpFolder)) {
+    const files = fs.readdirSync(tmpFolder)
+    for(let filePath of files) {
+      fs.unlinkSync(path.join(tmpFolder, filePath))
+    }
+    fs.rmdirSync(tmpFolder)
+  }
+}
+
 
 function buildClient() {
   const index = process.argv.indexOf('--folder')
   const baseFolder = index === -1 ? `${process.cwd()}` : path.join(process.cwd(), process.argv[index + 1])
   let userConfig = {}
-  if(fs.existsSync(path.join(baseFolder, './webpack.config.override.js'))) {
+  initTempFolder({ baseFolder })
+  const userWebpackConfigPath = path.join(baseFolder, './webpack.config.override.js')
+  if(fs.existsSync(userWebpackConfigPath)) {
     try {
-      userConfig = require(path.join(baseFolder, './webpack.config.override.js'))
+      userConfig = require(userWebpackConfigPath)
     } catch(e) {
       console.error(JSON.stringify(e))
     }
@@ -20,8 +42,8 @@ function buildClient() {
       baseFolder: baseFolder
     })
     const mergedConfig = Object.assign({}, defaultConfig, userConfig)
-    // console.log(mergedConfig)
-    const compiler = webpack(mergedConfig);
+    const wrapperMergedConfig = wrapClientConfig(mergedConfig, {baseFolder})
+    const compiler = webpack(wrapperMergedConfig);
     compiler.run((err: any, stats: any) => {
       console.log(stats.toString({
         chunks: false,  // 使构建过程更静默无输出
@@ -44,6 +66,7 @@ function buildClient() {
       fs.writeFileSync(path.join(baseFolder, CLIENT_BUILD_PATH, 'buildInfo.json'), JSON.stringify(chunkPathMap, null, 4))
       compiler.close((closeErr: any) => {
         console.log('编译完毕')
+        clearTempFolder({baseFolder})
       });
     });
   } catch (e: any) {

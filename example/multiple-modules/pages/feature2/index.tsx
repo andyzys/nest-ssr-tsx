@@ -1,4 +1,4 @@
-import React, {useState, useLayoutEffect, useEffect} from 'react'
+import React, {useState, useLayoutEffect, useEffect, useRef} from 'react'
 // @ts-ignore
 import css from './index.less'
 import Hello from './hello/test'
@@ -6,7 +6,9 @@ import Hello from './hello/test'
 export default function(props: any) {
   const [count, setCount] = useState(3)
   useEffect(() => {
-    console.log('111')
+    setTimeout(() => {
+      setCount(count + 1)
+    }, 3000)
   }, [])
   return (
     <div>
