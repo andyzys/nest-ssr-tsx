@@ -1,6 +1,6 @@
 {
   "name": "nestjs-tsx-render",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "main": "dist/src/index.js",
   "license": "ISC",
   "scripts": {
@@ -13,7 +13,7 @@
     "publishToNpm": "yarn clean && yarn build && npm publish --registry https://registry.npmjs.org"
   },
   "bin": {
-    "ntr": "./bin/bin.js"
+    "ntr": "dist/bin/bin.js"
   },
   "devDependencies": {
     "@babel/core": "^7.19.1",
