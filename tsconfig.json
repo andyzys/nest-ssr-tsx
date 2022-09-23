@@ -17,6 +17,7 @@
     "target": "es2019"
   },
   "include": [
+    "bin",
     "src/**/*",
     "__tests__/**/*",
     "example/**/*",
