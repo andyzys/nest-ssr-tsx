@@ -23,7 +23,6 @@ function clearTempFolder({ baseFolder }: any) {
   }
 }
 
-
 function buildClient() {
   const index = process.argv.indexOf('--folder')
   const baseFolder = index === -1 ? `${process.cwd()}` : path.join(process.cwd(), process.argv[index + 1])
@@ -74,4 +73,6 @@ function buildClient() {
   }
 }
 
-buildClient()
+export {
+  buildClient
+}

@@ -72,8 +72,6 @@ cjs
 
 tests_output
 
-bin
-
 package-lock.json
 
 **/build
