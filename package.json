@@ -1,7 +1,7 @@
 {
   "name": "nestjs-tsx-render",
-  "version": "0.0.4",
-  "main": "dist/index.js",
+  "version": "0.0.5",
+  "main": "dist/src/index.js",
   "license": "ISC",
   "scripts": {
     "build:test": "tsc --noEmit",
