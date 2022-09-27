@@ -1,13 +1,16 @@
 const getKConfBuriedConfig = () => {
   return new Promise((resolve, reject) => {
-    fetch('/api/pass/track/getKconfConfig', {
+    fetch('/api/paas/kconf/getConfByKeys', {
       method: 'POST',
       body: JSON.stringify({
         keys: [
           'platecoDev.kwaishopPower.channelDeliveryMap',
           'platecoDev.kwaishopPower.buriedPointAppNameMap'
         ]
-      })
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
     }).then((thenable) => {
       const resData = thenable.json()
       return resData.then(json => {
@@ -23,12 +26,15 @@ const getKConfBuriedConfig = () => {
 
 const updateDeliveryChannelOfFile = (fileId, deliveryChannel) => {
   return new Promise((resolve, reject) => {
-    fetch('/api/pass/file/modifyFileDeliveryChannel', {
+    fetch('/api/paas/file/modifyFileDeliveryChannel', {
       method: 'POST',
       body: JSON.stringify({
         fileId,
         deliveryChannel
-      })
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
     }).then((thenable) => {
       const resData = thenable.json()
       return resData.then(json => {
@@ -44,12 +50,15 @@ const updateDeliveryChannelOfFile = (fileId, deliveryChannel) => {
 
 const updatePageEntrySrcRegistOfBuried = (entrySrcList, config) => {
   return new Promise((resolve, reject) => {
-    fetch('/api/pass/track/registerTrackByEntrySrc', {
+    fetch('/api/paas/track/registerTrackByEntrySrc', {
       method: 'POST',
       body: JSON.stringify({
         entrySrcList,
         config
-      })
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
     }).then((thenable) => {
       const resData = thenable.json()
       return resData.then(json => {

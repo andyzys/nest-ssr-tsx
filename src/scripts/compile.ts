@@ -1,4 +1,5 @@
 const webpack = require('webpack')
+const { merge } = require('webpack-merge');
 const { getClientWebpack } = require('./config/index')
 const path = require('path')
 const fs = require('fs')
@@ -40,7 +41,7 @@ function buildClient() {
     const defaultConfig = getClientWebpack({
       baseFolder: baseFolder
     })
-    const mergedConfig = Object.assign({}, defaultConfig, userConfig)
+    const mergedConfig = merge(defaultConfig, userConfig)
     const wrapperMergedConfig = wrapClientConfig(mergedConfig, {baseFolder})
     const compiler = webpack(wrapperMergedConfig);
     compiler.run((err: any, stats: any) => {

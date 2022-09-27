@@ -1,7 +1,7 @@
 // @ts-ignore
 import { Select, List, Modal, Input, message } from 'antd';
-import React, { useCallback, useEffect } from 'react';
-import { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import XLSX from 'xlsx';
 // @ts-ignore
 import css from './EditorMeta.less'
 
@@ -22,7 +22,7 @@ interface IDefaultDeliveryList {
   children: IDefaultDeliveryItem[]
 }
 
-export default function EditorMeta(props: any) {
+export default function EditorMeta(props) {
   const { defaultDeliveryList, fileContent } = props;
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedItems, setSelectedItems] = useState<IDefaultDeliveryItem[]>([]);
@@ -30,10 +30,11 @@ export default function EditorMeta(props: any) {
   const pageUri = fileContent?.uri;
   const selectedInfos = JSON.parse(fileContent?.deliveryChannel || '[]')
   const pageCode = pageUri?.split('/')[pageUri?.split('/')?.length - 1] || ''
-
-  if (selectedInfos && selectedInfos.length > 0) {
-    setSelectedItems([...selectedInfos])
-  }
+  useEffect(() => {
+    if (selectedInfos && selectedInfos.length > 0) {
+      setSelectedItems([...selectedInfos])
+    }
+  }, [])
 
   const convertEachItemConfig = () => {
     let map = {}
@@ -109,6 +110,24 @@ export default function EditorMeta(props: any) {
     message.success('已复制到剪贴板');
   };
 
+  const exportToCsv = (items) => {
+    const ws = XLSX.utils.json_to_sheet(
+      items.map((item) => ({
+        资源位名称: item.title,
+        线上链接: item.url,
+        渠道标识: item.identification,
+        page_code: `OP_ACTIVITY_FZ_${pageCode}`
+      }))
+    );
+  
+    /* 新建空workbook，然后加入worksheet */
+    var wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+  
+    /* 生成xlsx文件 */
+    XLSX.writeFile(wb, `${fileContent.name}投放渠道(${new Date().getTime()}).xlsx`);
+  }
+
   const mergeItemIntoAll = () => {
     const newSelectedItems = [...selectedItems];
     newSelectedItems.forEach(item => {
@@ -132,7 +151,6 @@ export default function EditorMeta(props: any) {
       )
       nodes.push(groupNode);
     })
-
     return (
       <Select
         labelInValue
@@ -159,10 +177,7 @@ export default function EditorMeta(props: any) {
           props.onSelectionChange(handled)
         }}
       >
-        {/* {...nodes} */}
-        <Option value="jack">Jack</Option>
-        <Option value="lucy">Lucy</Option>
-        <Option value="tom">Tom</Option>
+        {nodes.map(node => (node))}
       </Select>
     )
   }
@@ -176,6 +191,10 @@ export default function EditorMeta(props: any) {
             e.stopPropagation();
             copy(selectedItems)
           }}>一键复制所有链接</a>
+          <a style={{marginLeft: 10}} onClick={(e) => {
+            e.stopPropagation();
+            exportToCsv(selectedItems);
+          }}>导出数据到CSV</a>
         </h3>
         <p style={{fontSize: 12, color: "#8c8c8c"}}>单击条目可单独复制一行</p>
         <List
@@ -221,18 +240,6 @@ export default function EditorMeta(props: any) {
     <div className={css.edt}>
       {renderSelect()}
       {renderSelection()}
-      <Select
-        showSearch
-        placeholder="Select a person"
-        optionFilterProp="children"
-        filterOption={(input, option) =>
-          (option!.children as unknown as string).toLowerCase().includes(input.toLowerCase())
-        }
-      >
-        <Option value="jack">Jack</Option>
-        <Option value="lucy">Lucy</Option>
-        <Option value="tom">Tom</Option>
-      </Select>
       <Modal title="修改渠道链接" visible={isModalVisible} onOk={() => {
         mergeItemIntoAll();
         setIsModalVisible(false);

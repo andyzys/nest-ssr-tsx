@@ -3,7 +3,7 @@ import { Spin } from 'antd'
 import EditorMeta from './EditorMeta'
 import { updateDeliveryChannelOfFile, updatePageEntrySrcRegistOfBuried } from './util'
 
-export default function DeliveryManage(props:any) {
+export default function DeliveryManage(props: any) {
   const [loading, setLoading] = useState(false);
   const { defaultChannelDeliveryList, fileContent, defaultAppNameMap } = props;
   const onSelectionChange = (list: any) => {
@@ -14,7 +14,7 @@ export default function DeliveryManage(props:any) {
         const uri = fileContent.uri?.split('/')[fileContent.uri?.split('/')?.length - 1] || ''
       const appName = defaultAppNameMap[uri] ? ('ACTIVITY_' + defaultAppNameMap[uri]) : ('ACTIVITY_' + 'FZACTIVITY2021')
         // const appName = 'ACTIVITY_FZSTAGINGACTIVITY';
-        const entrySrcList = list.map((entrySrc) => {
+        const entrySrcList = list.map((entrySrc: any) => {
           return {
             key: entrySrc.key,
             value: entrySrc.label
@@ -27,6 +27,7 @@ export default function DeliveryManage(props:any) {
         });
       })
       .then((res) => {
+        console.log('@@@@', res)
       })
   }
 
