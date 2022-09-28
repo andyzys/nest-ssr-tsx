@@ -17,7 +17,8 @@ const getClientWebpack = (config: {
     externals: {
       react: 'React',
       'react-dom': 'ReactDOM',
-      'antd': 'antd'
+      'antd': 'antd',
+      '@mybricks/rxui': 'rxui'
     },
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx'],
