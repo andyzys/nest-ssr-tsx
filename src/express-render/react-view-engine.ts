@@ -66,6 +66,9 @@ export function reactViews(reactViewOptions: ReactViewsOptions) {
           <script crossorigin="anonymous" src="//f2.eckwai.com/udata/pkg/eshop/fangzhou/pub/pkg/mybricks/rxui-1.0.84/index.js"></script>
           <script crossorigin="anonymous" src="//f2.eckwai.com/udata/pkg/eshop/fangzhou/pub/pkg/compiler-js/0.0.15/index.min.js"></script>
           <script crossorigin="anonymous" src="//f2.eckwai.com/kos/nlav12333/fangzhou/pkg/xlsx.full.min.80e1ddf43c5aa310.js"></script>
+          <script crossorigin="anonymous" src="//f2.eckwai.com/udata/pkg/eshop/fangzhou/pub/pkg/dayjs-1.10.7/dayjs.min.js"></script>
+          <script crossorigin="anonymous" src="//f2.eckwai.com/udata/pkg/eshop/fangzhou/pub/pkg/axios/axios.min.js"></script>
+          <script crossorigin="anonymous" src="//f2.eckwai.com/udata/pkg/eshop/fangzhou/pub/pkg/lodash/4.17.21/lodash.min.js"></script>
         `
         html = `
           <!DOCTYPE html>
