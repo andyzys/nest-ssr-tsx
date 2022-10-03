@@ -10,7 +10,7 @@ const getClientWebpack = (config: {
     cache: {
       type: "filesystem", 
     },
-    mode: "development",// "production" | "development" | "none"
+    mode: process.env.NODE_ENV === 'production' ? "production" : "development", // "production" | "development" | "none"
     output: {
       filename: "[name].js",
       path: path.join(config.baseFolder, CLIENT_BUILD_PATH),
