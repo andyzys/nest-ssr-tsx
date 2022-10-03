@@ -41,7 +41,6 @@ export function reactViews(reactViewOptions: ReactViewsOptions) {
     const { settings, _locals, cache, contexts, ...userVars } = options as ExpressRenderOptions
     const folderPathOfFile = getDirPathFromFullPath(filename)
     try {
-      console.log('@@@@@', userVars, filename)
       const rawComponentStr = `
         <script id="${INJECT_DATA_SCRIPT_ID}" data-obj="${encodeURIComponent(JSON.stringify(userVars))}"></script>
         <script>${fs.readFileSync(filename, 'utf-8')}</script>
@@ -68,7 +67,6 @@ export function reactViews(reactViewOptions: ReactViewsOptions) {
           <script crossorigin="anonymous" src="//f2.eckwai.com/kos/nlav12333/fangzhou/pkg/xlsx.full.min.80e1ddf43c5aa310.js"></script>
           <script crossorigin="anonymous" src="//f2.eckwai.com/udata/pkg/eshop/fangzhou/pub/pkg/dayjs-1.10.7/dayjs.min.js"></script>
           <script crossorigin="anonymous" src="//f2.eckwai.com/udata/pkg/eshop/fangzhou/pub/pkg/axios/axios.min.js"></script>
-          <script crossorigin="anonymous" src="//f2.eckwai.com/udata/pkg/eshop/fangzhou/pub/pkg/lodash/4.17.21/lodash.min.js"></script>
         `
         html = `
           <!DOCTYPE html>
