@@ -1,6 +1,6 @@
 {
   "name": "nestjs-tsx-render",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "main": "dist/src/index.js",
   "license": "ISC",
   "scripts": {
@@ -8,6 +8,7 @@
     "build": "yarn clean && tsc --build tsconfig.build.json",
     "clean": "rimraf dist",
     "compile:example": "cd example/multiple-modules && npx ts-node --files ../../bin/bin.ts build",
+    "compile:example:watch": "cd example/multiple-modules && npx ts-node --files ../../bin/bin.ts build -w",
     "start:basic": "nodemon --exec ts-node --files example/basic/main.ts",
     "start:multiple-modules": "cd example/multiple-modules && nodemon  --exec ts-node --files ./server/main.ts",
     "publishToNpm": "yarn clean && yarn build && npm publish --registry https://registry.npmjs.org"

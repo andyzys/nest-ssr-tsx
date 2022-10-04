@@ -6,6 +6,8 @@ const fs = require('fs')
 import { CLIENT_BUILD_PATH, BUILD_TEMP_FOLDER_NAME } from '../common/constant'
 import { wrapClientConfig } from './entry/util'
 
+let compileWatcher: any = null;
+
 function initTempFolder({ baseFolder }: any) {
   const tmpFolder = path.join(baseFolder, `./${BUILD_TEMP_FOLDER_NAME}`)
   if(!fs.existsSync(tmpFolder)) {
@@ -22,6 +24,23 @@ function clearTempFolder({ baseFolder }: any) {
     }
     fs.rmdirSync(tmpFolder)
   }
+}
+
+function storeResult(statJson: any, { baseFolder }: { baseFolder: string }) {
+  const chunkMap = statJson.assetsByChunkName
+  let chunkPathMap: any = {}
+  for(let entryKey in chunkMap) {
+    const chunkList = chunkMap[entryKey]
+    chunkPathMap[entryKey] = {}
+    for(let chunkName of chunkList) {
+      if(chunkName.indexOf('.js') !== -1) {
+        chunkPathMap[entryKey]['js'] = path.join(baseFolder, CLIENT_BUILD_PATH, chunkName)
+      } else if(chunkName.indexOf('.css') !== -1){
+        chunkPathMap[entryKey]['css'] = path.join(baseFolder, CLIENT_BUILD_PATH, chunkName)
+      }
+    }
+  }
+  fs.writeFileSync(path.join(baseFolder, CLIENT_BUILD_PATH, 'buildInfo.json'), JSON.stringify(chunkPathMap, null, 4))
 }
 
 function buildClient() {
@@ -49,21 +68,7 @@ function buildClient() {
         chunks: false,  // 使构建过程更静默无输出
         colors: true    // 在控制台展示颜色
       }))
-      const statJson = stats.toJson()
-      const chunkMap = statJson.assetsByChunkName
-      let chunkPathMap: any = {}
-      for(let entryKey in chunkMap) {
-        const chunkList = chunkMap[entryKey]
-        chunkPathMap[entryKey] = {}
-        for(let chunkName of chunkList) {
-          if(chunkName.indexOf('.js') !== -1) {
-            chunkPathMap[entryKey]['js'] = path.join(baseFolder, CLIENT_BUILD_PATH, chunkName)
-          } else if(chunkName.indexOf('.css') !== -1){
-            chunkPathMap[entryKey]['css'] = path.join(baseFolder, CLIENT_BUILD_PATH, chunkName)
-          }
-        }
-      }
-      fs.writeFileSync(path.join(baseFolder, CLIENT_BUILD_PATH, 'buildInfo.json'), JSON.stringify(chunkPathMap, null, 4))
+      storeResult(stats.toJson(), { baseFolder })
       compiler.close((closeErr: any) => {
         console.log('编译完毕')
         clearTempFolder({baseFolder})
@@ -74,6 +79,61 @@ function buildClient() {
   }
 }
 
+function checkIsWatching() {
+  if(compileWatcher) {
+    return true
+  } else {
+    false
+  }
+}
+
+function closeWatching() {
+  if (compileWatcher) {
+    compileWatcher.close();
+    compileWatcher = null;
+    console.log('watcher关闭成功')
+  }
+}
+
+function watchClient() {
+  const baseFolder = process.cwd()
+  let userConfig = {}
+  initTempFolder({ baseFolder })
+  const userWebpackConfigPath = path.join(baseFolder, './webpack.config.override.js')
+  if(fs.existsSync(userWebpackConfigPath)) {
+    try {
+      userConfig = require(userWebpackConfigPath)
+    } catch(e) {
+      console.error(JSON.stringify(e))
+    }
+  }
+  try {
+    const defaultConfig = getClientWebpack({
+      baseFolder: baseFolder
+    })
+    const mergedConfig = merge(defaultConfig, userConfig)
+    const wrapperMergedConfig = wrapClientConfig(mergedConfig, {baseFolder})
+    const compiler = webpack(wrapperMergedConfig);
+    if(checkIsWatching()) {
+      console.log('存在历史watching，正在尝试关闭')
+      closeWatching()
+    }
+    compileWatcher = compiler.watch({
+      aggregateTimeout: 300,
+      poll: 300,
+    }, (err: any, stats: any) => {
+      console.log(stats.toString({
+        chunks: false,  // 使构建过程更静默无输出
+        colors: true    // 在控制台展示颜色
+      }))
+      storeResult(stats.toJson(), {baseFolder})
+    });
+  } catch (e: any) {
+    console.warn(e.message);
+  }
+}
+
 export {
-  buildClient
+  buildClient,
+  watchClient
 }

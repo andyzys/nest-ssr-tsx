@@ -1,7 +1,7 @@
 const path = require("path")
 const baseFolder = process.cwd()
 module.exports = {
-  mode: "production",
+  // mode: "production",
   entry: {
     feature1: `${path.join(baseFolder, 'pages/feature1/index.tsx')}`,
     feature2: `${path.join(baseFolder, 'pages/feature2/index.tsx')}`,
