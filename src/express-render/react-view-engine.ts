@@ -7,7 +7,7 @@ import {
   ReactViewsOptions,
 } from './react-view-engine.interface'
 import * as fs from 'fs'
-import { getCssStringFromBaseFolderPath, getDirPathFromFullPath } from '../util'
+import { getCssStringFromBaseFolderPath, getDirPathFromFullPath, generateInjectScriptTag, getExternalConfig, generateInjectStyleTag } from '../util'
 import { INJECT_DATA_SCRIPT_ID } from '../common/constant'
 
 export function setupReactViews(
@@ -47,33 +47,21 @@ export function reactViews(reactViewOptions: ReactViewsOptions) {
       `
       const transform = reactViewOptions.transform || ((html) => {
         const injectCssList = getCssStringFromBaseFolderPath(folderPathOfFile)
-        const injectCss = injectCssList.reduce((accu: string, cssStrWithTag: string) => {
+        const injectCssStr = injectCssList.reduce((accu: string, cssStrWithTag: string) => {
           accu += cssStrWithTag
           return accu
         }, '')
-        const injectCssTag = `
-          <link
-            rel="stylesheet"
-            type="text/css"
-            href="//f2.eckwai.com/udata/pkg/eshop/fangzhou/pub/pkg/antd-4.16.13/dist/antd.min.css"
-          />
-        `
-        const injectScriptTag = `
-          <script crossorigin="anonymous" src="//f2.eckwai.com/udata/pkg/eshop/fangzhou/pub/pkg/react@17.0.2/umd/react.production.min.js"></script>
-          <script crossorigin="anonymous" src="//f2.eckwai.com/udata/pkg/eshop/fangzhou/pub/pkg/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
-          <script crossorigin="anonymous" src="//f2.eckwai.com/udata/pkg/eshop/fangzhou/pub/pkg/antd-4.16.13/dist/antd.min.js"></script>
-          <script crossorigin="anonymous" src="//f2.eckwai.com/udata/pkg/eshop/fangzhou/pub/pkg/mybricks/rxui-1.0.84/index.js"></script>
-          <script crossorigin="anonymous" src="//f2.eckwai.com/udata/pkg/eshop/fangzhou/pub/pkg/compiler-js/0.0.15/index.min.js"></script>
-          <script crossorigin="anonymous" src="//f2.eckwai.com/kos/nlav12333/fangzhou/pkg/xlsx.full.min.80e1ddf43c5aa310.js"></script>
-          <script crossorigin="anonymous" src="//f2.eckwai.com/udata/pkg/eshop/fangzhou/pub/pkg/dayjs-1.10.7/dayjs.min.js"></script>
-          <script crossorigin="anonymous" src="//f2.eckwai.com/udata/pkg/eshop/fangzhou/pub/pkg/axios/axios.min.js"></script>
-        `
+
+        const externalConfig = getExternalConfig()
+        const injectScriptTag = generateInjectScriptTag({ injectScript: externalConfig?.injectScript })
+        const injectStyleTag = generateInjectStyleTag({ injectStyle: externalConfig?.injectStyle })
+
         html = `
           <!DOCTYPE html>
           <html lang="zh-CN" class="no-js">
             <head>
-              ${injectCssTag}
-              ${injectCss}
+              ${injectStyleTag}
+              ${injectCssStr}
               ${injectScriptTag}
             </head>
             <body>

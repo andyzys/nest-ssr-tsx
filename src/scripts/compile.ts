@@ -3,7 +3,7 @@ const { merge } = require('webpack-merge');
 const { getClientWebpack } = require('./config/index')
 const path = require('path')
 const fs = require('fs')
-import { CLIENT_BUILD_PATH, BUILD_TEMP_FOLDER_NAME } from '../common/constant'
+import { CLIENT_BUILD_PATH, BUILD_TEMP_FOLDER_NAME, WEBPACK_MERGED_CONFIG_TMP, WEBPACK_EXTERNAL_CONFIG } from '../common/constant'
 import { wrapClientConfig } from './entry/util'
 
 let compileWatcher: any = null;
@@ -43,12 +43,10 @@ function storeResult(statJson: any, { baseFolder }: { baseFolder: string }) {
   fs.writeFileSync(path.join(baseFolder, CLIENT_BUILD_PATH, 'buildInfo.json'), JSON.stringify(chunkPathMap, null, 4))
 }
 
-function buildClient() {
-  const index = process.argv.indexOf('--folder')
-  const baseFolder = index === -1 ? `${process.cwd()}` : path.join(process.cwd(), process.argv[index + 1])
+function calcWebpackConfig({ baseFolder }: { baseFolder: string }) {
   let userConfig = {}
   initTempFolder({ baseFolder })
-  const userWebpackConfigPath = path.join(baseFolder, './webpack.config.override.js')
+  const userWebpackConfigPath = path.join(baseFolder, `./${WEBPACK_EXTERNAL_CONFIG}`)
   if(fs.existsSync(userWebpackConfigPath)) {
     try {
       userConfig = require(userWebpackConfigPath)
@@ -56,12 +54,26 @@ function buildClient() {
       console.error(JSON.stringify(e))
     }
   }
+  const defaultConfig = getClientWebpack({
+    baseFolder: baseFolder
+  })
+  const mergedConfig = merge(defaultConfig, userConfig)
+  // 持久化后删除多余配置
+  fs.writeFileSync(path.join(baseFolder, CLIENT_BUILD_PATH, WEBPACK_MERGED_CONFIG_TMP), JSON.stringify(mergedConfig, null, 4))
+  delete mergedConfig['injectStyle']
+  delete mergedConfig['injectScript']
+  // 返回标准配置
+  const wrapperMergedConfig = wrapClientConfig(mergedConfig, {baseFolder})
+  return wrapperMergedConfig
+}
+
+function buildClient() {
+  const index = process.argv.indexOf('--folder')
+  const baseFolder = index === -1 ? `${process.cwd()}` : path.join(process.cwd(), process.argv[index + 1])
+
   try {
-    const defaultConfig = getClientWebpack({
-      baseFolder: baseFolder
-    })
-    const mergedConfig = merge(defaultConfig, userConfig)
-    const wrapperMergedConfig = wrapClientConfig(mergedConfig, {baseFolder})
+    const wrapperMergedConfig = calcWebpackConfig({ baseFolder })
+
     const compiler = webpack(wrapperMergedConfig);
     compiler.run((err: any, stats: any) => {
       console.log(stats.toString({
@@ -97,22 +109,8 @@ function closeWatching() {
 
 function watchClient() {
   const baseFolder = process.cwd()
-  let userConfig = {}
-  initTempFolder({ baseFolder })
-  const userWebpackConfigPath = path.join(baseFolder, './webpack.config.override.js')
-  if(fs.existsSync(userWebpackConfigPath)) {
-    try {
-      userConfig = require(userWebpackConfigPath)
-    } catch(e) {
-      console.error(JSON.stringify(e))
-    }
-  }
   try {
-    const defaultConfig = getClientWebpack({
-      baseFolder: baseFolder
-    })
-    const mergedConfig = merge(defaultConfig, userConfig)
-    const wrapperMergedConfig = wrapClientConfig(mergedConfig, {baseFolder})
+    const wrapperMergedConfig = calcWebpackConfig({baseFolder})
     const compiler = webpack(wrapperMergedConfig);
     if(checkIsWatching()) {
       console.log('存在历史watching，正在尝试关闭')
