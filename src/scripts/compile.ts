@@ -47,6 +47,7 @@ function calcWebpackConfig({ baseFolder }: { baseFolder: string }) {
   let userConfig = {}
   initTempFolder({ baseFolder })
   const userWebpackConfigPath = path.join(baseFolder, `./${WEBPACK_EXTERNAL_CONFIG}`)
+  const buildPath = path.join(baseFolder, CLIENT_BUILD_PATH)
   if(fs.existsSync(userWebpackConfigPath)) {
     try {
       userConfig = require(userWebpackConfigPath)
@@ -59,6 +60,9 @@ function calcWebpackConfig({ baseFolder }: { baseFolder: string }) {
   })
   const mergedConfig = merge(defaultConfig, userConfig)
   // 持久化后删除多余配置
+  if(!fs.existsSync(buildPath)) {
+    fs.mkdirSync(buildPath)
+  }
   fs.writeFileSync(path.join(baseFolder, CLIENT_BUILD_PATH, WEBPACK_MERGED_CONFIG_TMP), JSON.stringify(mergedConfig, null, 4))
   delete mergedConfig['injectStyle']
   delete mergedConfig['injectScript']
