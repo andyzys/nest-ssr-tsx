@@ -63,6 +63,9 @@ function calcWebpackConfig({ baseFolder }: { baseFolder: string }) {
   if(!fs.existsSync(buildPath)) {
     fs.mkdirSync(buildPath)
   }
+  if(!fs.existsSync(path.join(baseFolder, CLIENT_BUILD_PATH))) {
+    fs.mkdirSync(path.join(baseFolder, CLIENT_BUILD_PATH))
+  }
   fs.writeFileSync(path.join(baseFolder, CLIENT_BUILD_PATH, WEBPACK_MERGED_CONFIG_TMP), JSON.stringify(mergedConfig, null, 4))
   delete mergedConfig['injectStyle']
   delete mergedConfig['injectScript']
