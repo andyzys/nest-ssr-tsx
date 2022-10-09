@@ -1,6 +1,7 @@
 const path = require('path')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const WebpackBar = require('webpackbar');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 import { CLIENT_BUILD_PATH } from '../../common/constant'
 
 const getClientWebpack = (config: {
@@ -91,6 +92,7 @@ const getClientWebpack = (config: {
     },
     plugins: [
       new WebpackBar(),
+      new CleanWebpackPlugin(),
       new MiniCssExtractPlugin({
         filename: "[name].[contenthash:6].css",
         chunkFilename: "[id].[contenthash:6].css",
