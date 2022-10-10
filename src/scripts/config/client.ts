@@ -93,6 +93,21 @@ const getClientWebpack = (config: {
             },
             {loader: 'less-loader'}
           ]
+        },
+        {
+          test: /\.scss$/i,
+          use: [
+            MiniCssExtractPlugin.loader,
+            {
+              loader: 'css-loader',
+              options: {
+                modules: {
+                  localIdentName: '[local]-[hash:5]'
+                }
+              }
+            },
+            {loader: 'sass-loader'}
+          ]
         }
       ]
     },

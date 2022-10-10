@@ -1,6 +1,6 @@
 {
   "name": "nestjs-tsx-render",
-  "version": "0.0.19",
+  "version": "0.0.21",
   "main": "dist/src/index.js",
   "license": "ISC",
   "scripts": {
@@ -17,9 +17,6 @@
     "ntr": "dist/bin/bin.js"
   },
   "devDependencies": {
-    "@babel/core": "^7.19.1",
-    "@babel/plugin-proposal-class-properties": "^7.18.6",
-    "@babel/preset-react": "^7.18.6",
     "@commitlint/cli": "^13.0.0",
     "@commitlint/config-conventional": "^13.0.0",
     "@nestjs/cli": "^8.0.0",
@@ -41,13 +38,9 @@
     "@types/react": "^17.0.0",
     "@types/react-dom": "^18.0.6",
     "@types/semver": "^7.3.12",
-    "babel-loader": "^8.2.5",
     "compression": "^1.7.4",
     "cross-fetch": "^3.1.4",
-    "css-loader": "^6.7.1",
     "husky": "^7.0.0",
-    "less": "^4.1.3",
-    "less-loader": "^11.0.0",
     "lint-staged": "^11.0.0",
     "mini-css-extract-plugin": "^2.6.1",
     "react": "^17.0.1",
@@ -56,7 +49,6 @@
     "rxjs": "^7.0.0",
     "semantic-release": "^18.0.0",
     "semver": "^7.3.7",
-    "style-loader": "^3.3.1",
     "ts-loader": "^9.3.1",
     "ts-node": "^10.1.0",
     "typescript": "^4.0.0"
@@ -70,10 +62,20 @@
     "reflect-metadata": "^0.1.2"
   },
   "dependencies": {
+    "@babel/core": "^7.19.1",
+    "@babel/plugin-proposal-class-properties": "^7.18.6",
+    "@babel/preset-react": "^7.18.6",
     "clean-webpack-plugin": "^4.0.0",
+    "babel-loader": "^8.2.5",
     "commander": "^8.1.0",
     "webpack": "^5.74.0",
     "webpack-merge": "^5.8.0",
+    "sass": "^1.55.0",
+    "style-loader": "^3.3.1",
+    "less": "^4.1.3",
+    "css-loader": "^6.7.1",
+    "less-loader": "^11.0.0",
+    "sass-loader": "^13.1.0",
     "webpackbar": "^5.0.2"
   }
 }
