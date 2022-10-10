@@ -69,6 +69,7 @@ function calcWebpackConfig({ baseFolder }: { baseFolder: string }) {
   fs.writeFileSync(path.join(baseFolder, CLIENT_BUILD_PATH, WEBPACK_MERGED_CONFIG_TMP), JSON.stringify(mergedConfig, null, 4))
   delete mergedConfig['injectStyle']
   delete mergedConfig['injectScript']
+  delete mergedConfig['template']
   // 返回标准配置
   const wrapperMergedConfig = wrapClientConfig(mergedConfig, {baseFolder})
   return wrapperMergedConfig

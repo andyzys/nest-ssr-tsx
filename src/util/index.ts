@@ -29,7 +29,7 @@ const getCssStringFromBaseFolderPath = (folderPath: string) => {
   return cssResultString
 }
 
-const getExternalConfig = (): { injectScript: any[], injectStyle: any[] } => {
+const getExternalConfig = (): { injectScript?: any[], injectStyle?: any[], template?: string } => {
   let config: any = {}
   const externalConfigPath = path.join(process.cwd(), CLIENT_BUILD_PATH, WEBPACK_MERGED_CONFIG_TMP)
   if(fs.existsSync(externalConfigPath)) {

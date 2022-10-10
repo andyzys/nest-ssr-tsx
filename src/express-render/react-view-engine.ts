@@ -8,7 +8,7 @@ import {
 } from './react-view-engine.interface'
 import * as fs from 'fs'
 import { getCssStringFromBaseFolderPath, getDirPathFromFullPath, generateInjectScriptTag, getExternalConfig, generateInjectStyleTag } from '../util'
-import { INJECT_DATA_SCRIPT_ID } from '../common/constant'
+import { INJECT_DATA_SCRIPT_ID, EXTERNAL_TEMPLATE_CSS_MARKUP, EXTERNAL_TEMPLATE_JS_MARKUP } from '../common/constant'
 
 export function setupReactViews(
   app: Application,
@@ -45,7 +45,8 @@ export function reactViews(reactViewOptions: ReactViewsOptions) {
         <script id="${INJECT_DATA_SCRIPT_ID}" data-obj="${encodeURIComponent(JSON.stringify(userVars))}"></script>
         <script>${fs.readFileSync(filename, 'utf-8')}</script>
       `
-      const transform = reactViewOptions.transform || ((html) => {
+      const transform = reactViewOptions.transform || ((componentFragment) => {
+        let html = ''
         const injectCssList = getCssStringFromBaseFolderPath(folderPathOfFile)
         const injectCssStr = injectCssList.reduce((accu: string, cssStrWithTag: string) => {
           accu += cssStrWithTag
@@ -56,19 +57,27 @@ export function reactViews(reactViewOptions: ReactViewsOptions) {
         const injectScriptTag = generateInjectScriptTag({ injectScript: externalConfig?.injectScript })
         const injectStyleTag = generateInjectStyleTag({ injectStyle: externalConfig?.injectStyle })
 
-        html = `
-          <!DOCTYPE html>
-          <html lang="zh-CN" class="no-js">
-            <head>
-              ${injectStyleTag}
-              ${injectCssStr}
-              ${injectScriptTag}
-            </head>
-            <body>
-              ${html}
-            </body>
-          </html>   
-        `
+        if(externalConfig.template) {
+          let tempTpl = externalConfig.template
+          tempTpl = tempTpl
+            .replace(EXTERNAL_TEMPLATE_CSS_MARKUP, injectCssStr)
+            .replace(EXTERNAL_TEMPLATE_JS_MARKUP, componentFragment)
+          html = tempTpl
+        } else {
+          html = `
+            <!DOCTYPE html>
+            <html lang="zh-CN" class="no-js">
+              <head>
+                ${injectStyleTag}
+                ${injectCssStr}
+                ${injectScriptTag}
+              </head>
+              <body>
+                ${componentFragment}
+              </body>
+            </html>   
+          `
+        }
         return html
       })
       next(null, await transform(rawComponentStr))
