@@ -1,6 +1,6 @@
 {
   "name": "nestjs-tsx-render",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "main": "dist/src/index.js",
   "license": "ISC",
   "scripts": {

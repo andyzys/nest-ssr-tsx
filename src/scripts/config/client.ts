@@ -98,7 +98,12 @@ const getClientWebpack = (config: {
     },
     plugins: [
       new WebpackBar(),
-      new CleanWebpackPlugin(),
+      new CleanWebpackPlugin({
+        cleanOnceBeforeBuildPatterns: [
+          '**/*',
+          '!webpack.merged.json',
+        ]
+      }),
       new MiniCssExtractPlugin({
         filename: "[name].[contenthash:6].css",
         chunkFilename: "[id].[contenthash:6].css",
