@@ -1,29 +1,30 @@
-const path = require('path')
+const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const WebpackBar = require('webpackbar');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-import { CLIENT_BUILD_PATH } from '../../common/constant'
+const WebpackBar = require("webpackbar");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+import { CLIENT_BUILD_PATH } from "../../common/constant";
 
-const getClientWebpack = (config: {
-  baseFolder: string
-}) => {
+const getClientWebpack = (config: { baseFolder: string }) => {
   const serverConfig = {
     cache: {
-      type: "filesystem", 
+      type: "filesystem",
     },
-    mode: process.env.NODE_ENV === 'production' ? "production" : "development", // "production" | "development" | "none"
+    mode: process.env.NODE_ENV === "production" ? "production" : "development", // "production" | "development" | "none"
     output: {
       filename: "[name].js",
       path: path.join(config.baseFolder, CLIENT_BUILD_PATH),
     },
-    externals: {
-      react: 'React',
-      'react-dom': 'ReactDOM',
-      'antd': 'antd',
-      '@mybricks/rxui': 'rxui'
-    },
+    externals:
+      process.env.NODE_ENV === "production"
+        ? {
+            react: "React",
+            "react-dom": "ReactDOM",
+            antd: "antd",
+            "@mybricks/rxui": "rxui",
+          }
+        : {},
     resolve: {
-      extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      extensions: [".js", ".jsx", ".ts", ".tsx"],
     },
     module: {
       rules: [
@@ -31,103 +32,101 @@ const getClientWebpack = (config: {
           test: /\.jsx?$/,
           use: [
             {
-              loader: 'babel-loader',
+              loader: "babel-loader",
               options: {
                 presets: [
-                  '@babel/preset-react'  // jsx支持
+                  "@babel/preset-react", // jsx支持
                   //['@babel/preset-env', { useBuiltIns: 'usage', corejs: 2 }] // 按需使用polyfill
                 ],
                 plugins: [
-                  ['@babel/plugin-proposal-class-properties', {'loose': true}] // class中的箭头函数中的this指向组件
+                  ["@babel/plugin-proposal-class-properties", { loose: true }], // class中的箭头函数中的this指向组件
                 ],
-                cacheDirectory: true // 加快编译速度
-              }
-            }
-          ]
+                cacheDirectory: true, // 加快编译速度
+              },
+            },
+          ],
         },
         {
           test: /\.tsx?$/,
           use: [
             {
-              loader: 'babel-loader',
+              loader: "babel-loader",
               options: {
                 presets: [
-                  '@babel/preset-react'  // jsx支持
+                  "@babel/preset-react", // jsx支持
                 ],
                 plugins: [
-                  ['@babel/plugin-proposal-class-properties', {'loose': true}] // class中的箭头函数中的this指向组件
+                  ["@babel/plugin-proposal-class-properties", { loose: true }], // class中的箭头函数中的this指向组件
                 ],
-                cacheDirectory: true // 加快编译速度
-              }
+                cacheDirectory: true, // 加快编译速度
+              },
             },
             {
-              loader: 'ts-loader',
+              loader: "ts-loader",
               options: {
-                transpileOnly: true
-              }
-            }
-          ]
+                transpileOnly: true,
+              },
+            },
+          ],
         },
         {
           test: /\.css$/,
-          use: [MiniCssExtractPlugin.loader, {
-            loader: 'css-loader',
-            options: {
-              modules: {
-                localIdentName: '[local]-[hash:5]'
-              }
-            }
-          }]
+          use: [
+            MiniCssExtractPlugin.loader,
+            {
+              loader: "css-loader",
+              options: {
+                modules: {
+                  localIdentName: "[local]-[hash:5]",
+                },
+              },
+            },
+          ],
         },
         {
           test: /\.less$/i,
           use: [
             MiniCssExtractPlugin.loader,
             {
-              loader: 'css-loader',
+              loader: "css-loader",
               options: {
                 modules: {
-                  localIdentName: '[local]-[hash:5]'
-                }
-              }
+                  localIdentName: "[local]-[hash:5]",
+                },
+              },
             },
-            {loader: 'less-loader'}
-          ]
+            { loader: "less-loader" },
+          ],
         },
         {
           test: /\.scss$/i,
           use: [
             MiniCssExtractPlugin.loader,
             {
-              loader: 'css-loader',
+              loader: "css-loader",
               options: {
                 modules: {
-                  localIdentName: '[local]-[hash:5]'
-                }
-              }
+                  localIdentName: "[local]-[hash:5]",
+                },
+              },
             },
-            {loader: 'sass-loader'}
-          ]
-        }
-      ]
+            { loader: "sass-loader" },
+          ],
+        },
+      ],
     },
     plugins: [
       new WebpackBar(),
       new CleanWebpackPlugin({
-        cleanOnceBeforeBuildPatterns: [
-          '**/*',
-          '!webpack.merged.json',
-        ]
+        cleanOnceBeforeBuildPatterns: ["**/*", "!webpack.merged.json"],
       }),
       new MiniCssExtractPlugin({
         filename: "[name].[contenthash:6].css",
         chunkFilename: "[id].[contenthash:6].css",
       }),
-    ]
-  }
-  return serverConfig
-}
+    ],
+  };
+  return serverConfig;
+};
 
-export {
-  getClientWebpack
-}
+export { getClientWebpack };
