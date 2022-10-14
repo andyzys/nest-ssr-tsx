@@ -14,15 +14,12 @@ const getClientWebpack = (config: { baseFolder: string }) => {
       filename: "[name].js",
       path: path.join(config.baseFolder, CLIENT_BUILD_PATH),
     },
-    externals:
-      process.env.NODE_ENV === "production"
-        ? {
-            react: "React",
-            "react-dom": "ReactDOM",
-            antd: "antd",
-            "@mybricks/rxui": "rxui",
-          }
-        : {},
+    externals: {
+      react: "React",
+      "react-dom": "ReactDOM",
+      antd: "antd",
+      "@mybricks/rxui": "rxui",
+    },
     resolve: {
       extensions: [".js", ".jsx", ".ts", ".tsx"],
     },
