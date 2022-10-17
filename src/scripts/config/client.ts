@@ -13,6 +13,7 @@ const getClientWebpack = (config: { baseFolder: string }) => {
     output: {
       filename: "[name].js",
       path: path.join(config.baseFolder, CLIENT_BUILD_PATH),
+      publicPath: "",
     },
     externals: {
       react: "React",
@@ -69,7 +70,16 @@ const getClientWebpack = (config: { baseFolder: string }) => {
         {
           test: /\.css$/,
           use: [
-            MiniCssExtractPlugin.loader,
+            {
+              loader: MiniCssExtractPlugin.loader,
+              options: {
+                publicPath: (resourcePath: any, context: any) => {
+                  return (
+                    path.relative(path.dirname(resourcePath), context) + ""
+                  );
+                },
+              },
+            },
             {
               loader: "css-loader",
               options: {
@@ -83,7 +93,16 @@ const getClientWebpack = (config: { baseFolder: string }) => {
         {
           test: /\.less$/i,
           use: [
-            MiniCssExtractPlugin.loader,
+            {
+              loader: MiniCssExtractPlugin.loader,
+              options: {
+                publicPath: (resourcePath: any, context: any) => {
+                  return (
+                    path.relative(path.dirname(resourcePath), context) + ""
+                  );
+                },
+              },
+            },
             {
               loader: "css-loader",
               options: {
