@@ -1,4 +1,7 @@
-import { COMPONENT_ENTRY_PATH, INJECT_DATA_SCRIPT_ID } from '../../common/constant'
+import {
+  COMPONENT_ENTRY_PATH,
+  INJECT_DATA_SCRIPT_ID,
+} from "../../common/constant";
 
 export function getClientEntry() {
   return `
@@ -15,7 +18,7 @@ export function getClientEntry() {
     render(<Page {...JSON.parse(decodeURIComponent(script.dataset.obj))}/>, parent, () => {
         script.replaceWith(...[...script.childNodes])
     })  
-  `
+  `;
 }
 
 export function getReactDomClientEntry() {
@@ -33,5 +36,5 @@ export function getReactDomClientEntry() {
     ReactDOM.render(<Page {...JSON.parse(decodeURIComponent(script.dataset.obj))}/>, parent, () => {
         script.replaceWith(...[...script.childNodes])
     })  
-  `
+  `;
 }

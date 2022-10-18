@@ -4,7 +4,10 @@ const WebpackBar = require("webpackbar");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 import { CLIENT_BUILD_PATH } from "../../common/constant";
 
-const getClientWebpack = (config: { baseFolder: string }) => {
+const getClientWebpack = (config: { baseFolder: string; userConfig: any }) => {
+  const publicPath = config?.userConfig?.publicPath
+    ? config?.userConfig?.publicPath
+    : "";
   const serverConfig = {
     cache: {
       type: "filesystem",
@@ -13,7 +16,7 @@ const getClientWebpack = (config: { baseFolder: string }) => {
     output: {
       filename: "[name].js",
       path: path.join(config.baseFolder, CLIENT_BUILD_PATH),
-      publicPath: "",
+      publicPath: publicPath,
     },
     externals: {
       react: "React",
@@ -75,7 +78,8 @@ const getClientWebpack = (config: { baseFolder: string }) => {
               options: {
                 publicPath: (resourcePath: any, context: any) => {
                   return (
-                    path.relative(path.dirname(resourcePath), context) + ""
+                    path.relative(path.dirname(resourcePath), context) +
+                    publicPath
                   );
                 },
               },
@@ -98,7 +102,8 @@ const getClientWebpack = (config: { baseFolder: string }) => {
               options: {
                 publicPath: (resourcePath: any, context: any) => {
                   return (
-                    path.relative(path.dirname(resourcePath), context) + ""
+                    path.relative(path.dirname(resourcePath), context) +
+                    publicPath
                   );
                 },
               },
