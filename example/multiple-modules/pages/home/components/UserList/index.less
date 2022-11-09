@@ -1,0 +1,38 @@
+.userList {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.avatarWrapper {
+  margin-right: 8px;
+  margin-bottom: 4px;
+  .avatar {
+    position: relative;
+  }
+  .avatarHide {
+    cursor: pointer;
+    &:hover {
+      :global {
+        .ant-avatar {
+          color: #1f2329;
+        }
+      }
+    }
+    :global {
+      .ant-avatar {
+        color: #95999e;
+      }
+    }
+  }
+  .name {
+    position: absolute;
+    font-size: 12px;
+    white-space: nowrap;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #fff;
+  }
+}

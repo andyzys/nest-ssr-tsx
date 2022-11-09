@@ -1,0 +1,154 @@
+:global {
+  .ant-select-multiple .ant-select-selection-item-content {
+    img {
+      width: 20px !important;
+      height: 20px !important;
+    }
+    [title='itemName'] {
+      margin: 0 0 0 3px;
+    }
+    [title='itemDep'] {
+      display: none;
+    }
+    [title='itemAvatar'] {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
+
+.userSetting {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(31, 35, 41, 0.08);
+  padding-bottom: 12px;
+  form {
+    flex: 1;
+  }
+  :global {
+    .ant-form-item {
+      margin: 0;
+    }
+  }
+}
+
+.item {
+  :global {
+    .ant-select-item-option-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 20px;
+}
+.itemUser {
+  display: flex;
+  align-items: center;
+  .itemAvatar {
+    width: 32px;
+    height: 32px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    img {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+    }
+  }
+  .itemName {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 22px;
+    color: #1f2329;
+    margin: 0 8px 0 8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: normal;
+    white-space: nowrap;
+  }
+}
+.itemDep {
+  font-size: 12px;
+  font-weight: 400;
+  color: #c4c7cc;
+  line-height: 18px;
+  margin-right: 8px;
+}
+.userPanel {
+  height: 396px;
+  overflow-y: auto;
+  margin-top: 12px;
+  .title {
+    font-size: 14px;
+    font-weight: 400;
+    text-align: left;
+    color: #1f2329;
+  }
+  .userItem {
+    display: flex;
+    align-items: center;
+    height: 48px;
+    padding: 0 0 !important;
+    .userAvatar {
+      flex: 0 0 32px;
+      font-size: 32px;
+      height: 32px;
+      width: 32px;
+      border-radius: 50%;
+      overflow: hidden;
+      cursor: initial;
+      position: relative;
+      display: flex;
+      align-items: center;
+      img {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        object-fit: cover;
+        display: block;
+      }
+    }
+    .userProfile {
+      flex: 1 1;
+      margin-left: 8px;
+      padding-right: 16px;
+      max-width: 420px;
+      .userName {
+        height: 22px;
+        display: flex;
+        line-height: 22px;
+        color: #1f2329;
+        font-size: 14px;
+        font-weight: normal;
+        flex-grow: 1;
+        font-family: PingFangSC-Medium, sans-serif;
+      }
+      .userDep {
+        font-size: 12px;
+        font-weight: 400;
+        color: #95999e;
+        line-height: 18px;
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+  }
+}
+
+.userBatchSetting {
+  display: flex;
+  align-items: flex-start;
+  form {
+    flex: 1;
+  }
+}

@@ -1,6 +1,7 @@
 // @ts-ignore
 import { Select, List, Modal, Input, message } from 'antd';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect } from 'react';
+import { useState } from 'react';
 import XLSX from 'xlsx';
 // @ts-ignore
 import css from './EditorMeta.less'
@@ -158,7 +159,7 @@ export default function EditorMeta(props) {
           props.onSelectionChange(handled)
         }}
       >
-        {nodes.map(node => (node))}
+        {...nodes}
       </Select>
     )
   }

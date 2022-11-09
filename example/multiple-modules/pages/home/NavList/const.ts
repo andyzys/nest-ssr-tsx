@@ -1,0 +1,1 @@
+export const FANGZHOU_MY_INFO = 'FANGZHOU_MY_INFO'
