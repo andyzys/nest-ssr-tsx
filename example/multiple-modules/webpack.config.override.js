@@ -3,8 +3,20 @@ const baseFolder = process.cwd()
 module.exports = {
   // mode: "production",
   entry: {
-    feature1: `${path.join(baseFolder, 'pages/feature1/index.tsx')}`,
-    feature2: `${path.join(baseFolder, 'pages/feature2/index.tsx')}`,
+    // feature1: `${path.join(baseFolder, 'pages/feature1/index.tsx')}`,
+    // feature2: `${path.join(baseFolder, 'pages/feature2/index.tsx')}`,
+    home: `${path.join(baseFolder, 'pages/home/Home.tsx')}`,
+  },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
+        },
+      },
+    },
   },
   externals: {
     xlsx: 'XLSX'
@@ -27,6 +39,7 @@ module.exports = {
     '<script crossorigin="anonymous" src="//f2.eckwai.com/udata/pkg/eshop/fangzhou/pub/pkg/axios/axios.min.js"></script>',
     // '<script crossorigin="anonymous" src="https://alifd.alicdn.com/npm/@alilc/lowcode-engine@latest/dist/js/engine-core.js"></script>',
     // '<script crossorigin="anonymous" src="https://alifd.alicdn.com/npm/@alilc/lowcode-engine-ext@latest/dist/js/engine-ext.js"></script>'
+    '<script crossorigin="anonymous" src="/static/vendors.js"></script>',
   ],
   // renderMode: 'rxui',
   // template: `
