@@ -3,6 +3,7 @@ const { merge } = require("webpack-merge");
 const { getClientWebpack } = require("./config/index");
 const path = require("path");
 const fs = require("fs");
+const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 import {
   CLIENT_BUILD_PATH,
   BUILD_TEMP_FOLDER_NAME,
@@ -99,7 +100,7 @@ function calcWebpackConfig({ baseFolder }: { baseFolder: string }) {
   return wrapperMergedConfig;
 }
 
-function buildClient() {
+function buildClient({ analyze }: { analyze: boolean }) {
   const index = process.argv.indexOf("--folder");
   const baseFolder =
     index === -1
@@ -108,7 +109,13 @@ function buildClient() {
 
   try {
     const wrapperMergedConfig = calcWebpackConfig({ baseFolder });
-
+    if (analyze) {
+      wrapperMergedConfig.plugins.push(
+        new BundleAnalyzerPlugin({
+          analyzerMode: "static",
+        })
+      );
+    }
     const compiler = webpack(wrapperMergedConfig);
     compiler.run((err: any, stats: any) => {
       console.log(
