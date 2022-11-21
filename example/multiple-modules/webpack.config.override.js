@@ -9,6 +9,7 @@ module.exports = {
   },
   optimization: {
     splitChunks: {
+      maxSize: 100 * 1000,
       cacheGroups: {
         commons: {
           test: /[\\/]node_modules[\\/]/,
@@ -21,7 +22,7 @@ module.exports = {
   externals: {
     xlsx: 'XLSX'
   },
-  publicPath: '/build/static/',
+  publicPath: '/build',
   injectStyle: [
     '<link rel="stylesheet" type="text/css" href="//f2.eckwai.com/udata/pkg/eshop/fangzhou/pub/pkg/antd-4.16.13/dist/antd.min.css"/>',
     '<link rel="stylesheet" href="https://alifd.alicdn.com/npm/@alilc/lowcode-engine@latest/dist/css/engine-core.css" />',
@@ -39,7 +40,7 @@ module.exports = {
     '<script crossorigin="anonymous" src="//f2.eckwai.com/udata/pkg/eshop/fangzhou/pub/pkg/axios/axios.min.js"></script>',
     // '<script crossorigin="anonymous" src="https://alifd.alicdn.com/npm/@alilc/lowcode-engine@latest/dist/js/engine-core.js"></script>',
     // '<script crossorigin="anonymous" src="https://alifd.alicdn.com/npm/@alilc/lowcode-engine-ext@latest/dist/js/engine-ext.js"></script>'
-    '<script crossorigin="anonymous" src="/static/vendors.js"></script>',
+    // '<script crossorigin="anonymous" src="/static/vendors.js"></script>',
   ],
   // renderMode: 'rxui',
   // template: `

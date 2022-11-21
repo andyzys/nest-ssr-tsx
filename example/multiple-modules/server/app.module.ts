@@ -9,7 +9,7 @@ import { join } from "path";
   imports: [
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, "..", "buildfe"),
-      serveRoot: "/static",
+      serveRoot: "/build",
     }),
     Feature1Module,
     Feature2Module,

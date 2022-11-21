@@ -35,6 +35,25 @@ const getCssStringFromBaseFolderPath = (folderPath: string) => {
   return cssResultString;
 };
 
+const getCommonVendorFromBaseFolderPath = (
+  folderPath: string,
+  externalConfig: { publicPath: string }
+) => {
+  const fileListPath = fs.readdirSync(folderPath);
+  const vendorsResultString: string[] = [];
+  const publicPath = externalConfig?.publicPath
+    ? externalConfig?.publicPath
+    : "";
+  fileListPath?.forEach((fileName: string) => {
+    if (fileName.indexOf("vendors-") !== -1) {
+      vendorsResultString.push(
+        `<script src="${path.join(publicPath, fileName)}"></script>`
+      );
+    }
+  });
+  return vendorsResultString;
+};
+
 const getExternalConfig = (): {
   injectScript?: any[];
   injectStyle?: any[];
@@ -119,5 +138,6 @@ export {
   uuid,
   getCssStringFromBaseFolderPath,
   getCssStringFromPath,
+  getCommonVendorFromBaseFolderPath,
   getExternalConfig,
 };
