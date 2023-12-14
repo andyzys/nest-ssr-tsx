@@ -15,6 +15,7 @@ const wrapClientConfig = (webpackConfig: any, {baseFolder}: any) => {
     const entryExtName = path.extname(entryPath)
     const newEntryPath = path.join(baseFolder, `./${BUILD_TEMP_FOLDER_NAME}`,`./index.${uuid()}${entryExtName}`)
     const entryStr: string = newWebPackConfig?.renderMode === 'react' ? getReactDomClientEntry() : getClientEntry()
+    console.log(`当前渲染模版采用: ${newWebPackConfig?.renderMode ? newWebPackConfig?.renderMode : 'rxui'}`)
     const newEntryStr = entryStr.replace(COMPONENT_ENTRY_PATH, entryPath)
     fs.writeFileSync(newEntryPath, newEntryStr)
     newWebPackConfig.entry[entryKey] = newEntryPath
