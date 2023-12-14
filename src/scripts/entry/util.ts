@@ -19,6 +19,7 @@ const wrapClientConfig = (webpackConfig: any, {baseFolder}: any) => {
     fs.writeFileSync(newEntryPath, newEntryStr)
     newWebPackConfig.entry[entryKey] = newEntryPath
   }
+  delete newWebPackConfig['renderMode']
   return newWebPackConfig
 }
 
